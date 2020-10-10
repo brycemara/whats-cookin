@@ -2,11 +2,46 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Whats Cookin</title>
+    <link rel="stylesheet" href="./Styles.css">
+    <title>Eat Me!</title>
   </head>
   <body>
-    <h1>Whats Cookin</h1>
-
+    <header>
+        <img id="home-icon" src="../assets/home-icon.png" alt="home icon">
+      <div class="title">
+        <h1>Eat Me!</h1>
+      </div>
+      <div class="user-info">
+        <p>UserName</p>
+      </div>
+    </header>
+    <section class="main-content">
+      <section class="recipe-area">
+        <div class="random-recipe-landing">
+          <img id="large-dish-image" src="http://placeimg.com/640/480/any" alt="">
+          <h3 id="recipe-name">Recipe Name</h3>
+        </div>
+        <div class="search-bar">
+          <input type="text" name="search" value="">
+          <button type="button" name="search-button">Search!</button>
+        </div>
+        <div class="search-results">
+          <p>RECIPES HERE</p>
+        </div>
+      </section>
+      <section class="saved-want-area">
+        <div class="blank-log">
+          <p>You have no saved recipes!</p>
+        </div>
+        <div class="saved-log">
+          <div class="saved-recipe">
+            <img id="saved-dish-image" src="http://placeimg.com/200/150/any" alt="">
+            <img id="icon-image" src="" alt="">
+            <p>Recipe Card</p>
+          </div>
+        </div>
+      </section>
+    </section>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
