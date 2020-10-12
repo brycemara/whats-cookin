@@ -6,22 +6,22 @@ class User {
     this.recipesToCook = [];
     this.pantry = userObj.pantry;
   }
-  addFavoriteRecipe() {
+  addFavoriteRecipe(recipe) {
     // add recipe to this.favoriteRecipes
   }
-  removeFavoriteRecipe() {
+  removeFavoriteRecipe(recipe) {
 
   }
-  addRecipesToCook() {
+  addRecipesToCook(recipe) {
     // add recipe to cook to this.recipesToCook
   }
-  removeRecipesToCook() {
-    
+  removeRecipesToCook(recipe) {
+
   }
-  searchSavedRecipes() {
+  searchSavedRecipes(recipe) {
     // search for any saved recipe
   }
-  filterRecipes() {
+  filterRecipes(type) {
     // filter fav or to cook recipes by type
   }
 }
