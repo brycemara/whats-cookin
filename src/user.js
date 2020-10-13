@@ -24,6 +24,9 @@ class User {
   filterRecipes(type) {
     // filter fav or to cook recipes by type
   }
+  searchByIngredient() {
+    
+  }
 }
 
 if (typeof module !== 'undefined') {

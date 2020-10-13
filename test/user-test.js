@@ -30,7 +30,7 @@ let recipe;
     expect(user).to.be.an.instanceof(User);
   });
 
-  it('should be able to processing a user object input', () => {
+  it('should be able to process a user object input', () => {
     expect(user.id).to.be.equal(1);
     expect(user.name).to.be.equal("Saige O'Kon");
   });
