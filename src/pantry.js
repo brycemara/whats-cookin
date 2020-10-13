@@ -1,6 +1,6 @@
 class Pantry {
   constructor(ingredientList) {
-    this.pantry = ingredientList.forEach((ingredient) => new Ingredient);
+    this.pantry = ingredientList;
   }
   checkIngredients(pantry) {
 
