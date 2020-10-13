@@ -30,5 +30,9 @@ let recipe;
     expect(ingredientCost).to.deep.equal(17776);
   });
 
+  it('should be able to get instructions', () => {
+    let ingredientInstructions = recipe.getInstructions();
+    expect(ingredientInstructions.length).to.deep.equal(6)
+  });
 
 });

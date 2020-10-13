@@ -6,9 +6,6 @@ class Recipe {
     this.id = recipe.id;
     this.image = recipe.image;
     this.ingredients = recipe.ingredients;
-    //We want object with all key
-    //starting with recipeData
-    //use find method to lookup
     this.instructions = recipe.instructions;
     this.name = recipe.name;
     this.tags = recipe.tags;
@@ -29,10 +26,13 @@ class Recipe {
   }
 
   getInstructions() {
-
+    let instructions = this.instructions.map(step => {
+      return step.instruction;
+    });
+    return instructions;
   }
-}
+};
 
 if (typeof module !== 'undefined') {
   module.exports = Recipe;
-}
+};
