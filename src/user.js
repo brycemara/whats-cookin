@@ -6,26 +6,34 @@ class User {
     this.recipesToCook = [];
     this.pantry = userInfo.pantry;
   }
-  addFavoriteRecipe(recipe) {
-    // add recipe to this.favoriteRecipes
-  }
-  removeFavoriteRecipe(recipe) {
 
+  addFavoriteRecipe(recipe) {
+    this.favoriteRecipes.push(recipe);
   }
+
+  removeFavoriteRecipe(recipe) {
+    const index = this.favoriteRecipes.indexOf(recipe);
+    this.favoriteRecipes.splice(index, 1);
+  }
+
   addRecipesToCook(recipe) {
     // add recipe to cook to this.recipesToCook
   }
+
   removeRecipesToCook(recipe) {
 
   }
+
   searchSavedRecipes(recipe) {
     // search for any saved recipe
   }
+
   filterRecipes(type) {
     // filter fav or to cook recipes by type
   }
+
   searchByIngredient() {
-    
+
   }
 }
 

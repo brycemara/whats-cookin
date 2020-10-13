@@ -37,8 +37,13 @@ let recipe;
 
   it('should be able to add a favorite recipe', () => {
     user.addFavoriteRecipe(recipe);
-    except(user.favoriteRecipes).to.include(recipe);
+    expect(user.favoriteRecipes).to.include(recipe);
   });
 
+  it('should be able to remove a favorite recipe', () => {
+    user.addFavoriteRecipe(recipe);
+    user.removeFavoriteRecipe(recipe);
+    expect(user.favoriteRecipes).to.be.an('array').that.is.empty;
+  });
 
 });
