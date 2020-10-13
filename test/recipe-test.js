@@ -25,8 +25,9 @@ let recipe;
     expect(recipe.name).to.deep.equal("Loaded Chocolate Chip Pudding Cookie Cups");
   });
 
-  it('should be able to add a favorite recipe', () => {
-
+  it('should be able to get the cost of ingredients', () => {
+    let ingredientCost = recipe.getCostOfIngredients();
+    expect(ingredientCost).to.deep.equal(17776);
   });
 
 
