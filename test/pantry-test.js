@@ -19,5 +19,4 @@ let pantry;
     expect(pantry).to.be.an.instanceof(Pantry);
   });
 
-
 });
