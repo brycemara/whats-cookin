@@ -23,7 +23,5 @@ let ingredient;
 
   it('should findIngredientData if not given', ()=> {
     expect(ingredient.name).to.be.deep.equal("zucchini squash")
-
-  })
-
+  });
 });
