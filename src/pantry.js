@@ -13,7 +13,7 @@ class Pantry {
   }
 
   checkIngredients(recipe) {
-    let missing = recipe.ingredients.reduce((missingIngredients, ingredient) => {
+    let requiredIngredients = recipe.ingredients.reduce((missingIngredients, ingredient) => {
       let pantryIngredient = this.contents.find(content => {
         return content.id === ingredient.id
       })
@@ -29,19 +29,9 @@ class Pantry {
         };
         missingIngredients.push(missingIngredient);
       }
-      console.log(missingIngredients);
       return missingIngredients;
     }, []);
-    return missing;
-
-    // forEach (ingredient in recipe):
-    // get ingredient.id
-    // use that id in a find iterator, looking at pantry.contents
-    // if recipeData.quantity > pantry.contents
-    // then push name of ingredient and diff into array of missing ingredients
-    // return
-
-
+    return requiredIngredients;
   }
 
   needIngredients(recipe){
