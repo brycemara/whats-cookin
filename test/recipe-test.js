@@ -1,4 +1,4 @@
-;const chai = require('chai');
+const chai = require('chai');
 const expect = chai.expect;
 const data = require('../data/recipes');
 const recipeInfo = data.recipeData;
