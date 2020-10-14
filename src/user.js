@@ -16,16 +16,28 @@ class User {
     this.favoriteRecipes.splice(index, 1);
   }
 
-  addRecipesToCook(recipe) {
-    // add recipe to cook to this.recipesToCook
+  addRecipeToCook(recipe) {
+    this.recipesToCook.push(recipe);
   }
 
-  removeRecipesToCook(recipe) {
-
+  removeRecipeToCook(recipe) {
+    const index = this.recipesToCook.indexOf(recipe);
+    this.recipesToCook.splice(index, 1);
   }
 
-  searchSavedRecipes(recipe) {
-    // search for any saved recipe
+  searchFavoriteRecipes(recipeOrIngredient) {
+    let recipeResults = this.favoriteRecipes.filter(recipe => {
+      return recipe.name.includes(recipeOrIngredient);
+    });
+    let ingredientResults = this.favoriteRecipes.reduce((acc, recipe) => {
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient.name.includes(recipeOrIngredient)) {
+          acc.push(recipe);
+        }
+      })
+      return acc;
+    }, [])
+    return recipeResults.concat(ingredientResults);
   }
 
   filterRecipes(type) {

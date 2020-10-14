@@ -46,4 +46,32 @@ let recipe;
     expect(user.favoriteRecipes).to.be.an('array').that.is.empty;
   });
 
+  it('should be able to add a recipe to cook', () => {
+    user.addRecipeToCook(recipe);
+    expect(user.recipesToCook).to.include(recipe);
+  });
+
+  it('should be able to remove a favorite recipe', () => {
+    user.addRecipeToCook(recipe);
+    user.removeRecipeToCook(recipe);
+    expect(user.recipesToCook).to.be.an('array').that.is.empty;
+  });
+
+  it('should be able to search favorite recipes by recipe name', () => {
+    user.addFavoriteRecipe(recipe);
+    let result = user.searchFavoriteRecipes('Snakes');
+    expect(result).to.be.an('array').that.is.empty;
+    result = user.searchFavoriteRecipes('Cookie');
+    expect(result).to.include(recipe);
+  });
+
+  it('should be able to search favorite recipes by ingredient', () => {
+    user.addFavoriteRecipe(recipe);
+    let result = user.searchFavoriteRecipes('Snakes');
+    expect(result).to.be.an('array').that.is.empty;
+    result = user.searchFavoriteRecipes('wheat flour');
+    expect(result).to.include(recipe);
+  });
+
+
 });
