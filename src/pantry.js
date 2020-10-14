@@ -12,32 +12,42 @@ class Pantry {
     return ingredients;
   }
 
-  //TODO: Refactor, talk to PM about refactor
-  checkIngredients(recipe) {
+  getIngredientsNeeded(recipe) {
     let requiredIngredients = recipe.ingredients.reduce((missingIngredients, ingredient) => {
-      //TODO: Break with helper function
-      let pantryIngredient = this.contents.find(content => {
-        return content.id === ingredient.id
-      })
-      if (!pantryIngredient) {
-        pantryIngredient = ingredient;
-        pantryIngredient.pantryAmount = 0;
-      }
-      let ingredientDiff = ingredient.recipeAmount.amount - pantryIngredient.pantryAmount;
-      if (ingredientDiff >= 0) {
-        //TODO: Create ingredient instance!
-        let missingIngredient = {
-          name: ingredient.name,
-          amountMissing: ingredientDiff
-        };
+      let pantryIngredient = this.findPantryIngredient(ingredient);
+      let missingIngredient = this.createMissingIngredients(ingredient, pantryIngredient)
+      if (missingIngredient) {
         missingIngredients.push(missingIngredient);
       }
       return missingIngredients;
     }, []);
     return requiredIngredients;
+
   }
 
-  needIngredients(recipe){
+  createMissingIngredients(ingredient, pantryIngredient) {
+    let ingredientDiff = ingredient.recipeAmount.amount - pantryIngredient.pantryAmount;
+    if (ingredientDiff >= 0) {
+      let missingIngredient = new Ingredient(ingredient)
+      missingIngredient.pantryAmount = pantryIngredient.pantryAmount;
+      missingIngredient.recipeAmount = ingredient.recipeAmount.amount;
+      missingIngredient.amountMissing = ingredientDiff;
+      return missingIngredient;
+    }
+  }
+
+  findPantryIngredient(ingredient) {
+    let pantryIngredient = this.contents.find(content => {
+      return content.id === ingredient.id
+    })
+    if (!pantryIngredient) {
+      pantryIngredient = ingredient;
+      pantryIngredient.pantryAmount = 0;
+    }
+    return pantryIngredient;
+  }
+
+  checkIngredients(recipe){
 
   }
 

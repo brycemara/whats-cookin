@@ -33,7 +33,7 @@ let recipe;
   });
 
   it('should be able to determine if the pantry has enough ingredients', () => {
-    let checkRecipe = pantry.checkIngredients(recipe);
+    let checkRecipe = pantry.getIngredientsNeeded(recipe);
 
     expect(checkRecipe.length).to.be.deep.equal(4);
   });

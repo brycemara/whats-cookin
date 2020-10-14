@@ -1,5 +1,3 @@
-// const data = require('../data/recipes');
-// const recipeData = data.recipeData;
 const RecipeBook = require('../src/RecipeBook')
 
 class User {
