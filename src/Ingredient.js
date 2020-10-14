@@ -16,7 +16,9 @@ class Ingredient {
     });
     return ingredientName[key];
   }
-}
+};
 
 
-module.exports = Ingredient;
+if (typeof module !== 'undefined') {
+  module.exports = Ingredient;
+};

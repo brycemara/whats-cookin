@@ -1,5 +1,3 @@
-const data = require('../data/ingredients');
-const ingredientsData = data.ingredientsData;
 const Ingredient = require('../src/Ingredient');
 
 class Recipe {
@@ -14,7 +12,7 @@ class Recipe {
 
   createNewIngredients(recipe) {
     let ingredients = recipe.ingredients.map(ingredient => {
-      return new Ingredient(ingredient)
+      return new Ingredient(ingredient);
     });
     return ingredients;
   }

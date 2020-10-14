@@ -1,4 +1,4 @@
-const Ingredient = require('../src/Ingredient')
+const Ingredient = require('../src/Ingredient');
 
 class Pantry {
   constructor(ingredientList) {
@@ -39,11 +39,11 @@ class Pantry {
   findPantryIngredient(ingredient) {
     let pantryIngredient = this.contents.find(content => {
       return content.id === ingredient.id;
-    })
+    });
     if (!pantryIngredient) {
       pantryIngredient = ingredient;
       pantryIngredient.pantryAmount = 0;
-    }
+    };
     return pantryIngredient;
   }
 
@@ -60,8 +60,8 @@ class Pantry {
       pantryIngredient.pantryAmount -= ingredient.recipeAmount.amount;
     });
   }
-}
+};
 
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
-}
+};
