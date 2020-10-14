@@ -1,12 +1,12 @@
 const RecipeBook = require('../src/RecipeBook')
-
+const Pantry = require('../src/Pantry')
 class User {
   constructor(userInfo) {
     this.id = userInfo.id;
     this.name = userInfo.name;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
-    this.pantry = userInfo.pantry;
+    this.pantry = new Pantry(userInfo.pantry);
     this.recipes = new RecipeBook();
   }
 
@@ -21,6 +21,11 @@ class User {
 
   addRecipeToCook(recipe) {
     this.recipesToCook.push(recipe);
+  }
+
+  makeRecipeToCook(recipe) {
+    this.removeRecipeToCook(recipe);
+    this.pantry.removeUsedIngredients(recipe);
   }
 
   removeRecipeToCook(recipe) {

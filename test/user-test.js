@@ -2,6 +2,8 @@ const chai = require('chai');
 const expect = chai.expect;
 const data = require('../data/recipes');
 const recipeData = data.recipeData;
+const data1 = require('../data/users');
+const userData = data1.usersData;
 
 const User = require('../src/User');
 const Recipe = require('../src/Recipe');
@@ -11,14 +13,7 @@ let user;
 let recipe;
 
   beforeEach(() => {
-    user = new User({"name": "Saige O'Kon",
-    "id": 1,
-    "pantry": [
-      {
-        "ingredient": 11477,
-        "amount": 4
-      }
-    ]});
+    user = new User(userData[0]);
     recipe = new Recipe(recipeData[0]);
   });
 
@@ -83,5 +78,11 @@ let recipe;
     expect(results.length).to.deep.equal(10);
   });
 
+  it('should be able to make recipe', () => {
+    user.addRecipeToCook(recipe);
+    expect(user.recipesToCook).to.include(recipe);
+    let results = user.makeRecipeToCook(recipe);
+    expect(user.recipesToCook).to.be.an('array').that.is.empty;
+  });
 
 });

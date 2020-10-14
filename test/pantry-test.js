@@ -27,14 +27,17 @@ let recipe;
   });
 
   it('should have ingredients in pantry', () => {
-    let firstIngredient = {"estimatedCostInCents": 742, "id": 11477, "name": "zucchini squash", "pantryAmount": 4, "recipeAmount": undefined};
-
+    let firstIngredient = {"estimatedCostInCents": 742, "id": 11477, "name": "zucchini squash", "pantryAmount": 4, "recipeAmount": 0};
     expect(pantry.contents[0]).to.be.deep.equal(firstIngredient);
   });
 
   it('should be able to determine if the pantry has enough ingredients', () => {
-    let checkRecipe = pantry.getIngredientsNeeded(recipe);
+    let checkRecipe = pantry.hasNeededIngredients(recipe);
+    expect(checkRecipe).to.be.deep.equal(false);
+  });
 
+  it('should be able to determine what ingredients the  user needs', () => {
+    let checkRecipe = pantry.getIngredientsNeeded(recipe);
     expect(checkRecipe.length).to.be.deep.equal(4);
   });
 
