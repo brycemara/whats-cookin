@@ -78,5 +78,10 @@ let recipe;
     expect(results.length).to.deep.equal(9);
   });
 
+  it('should filter recipes by ingredient', () => {
+    let results = user.searchByIngredient('wheat flour');
+    expect(results.length).to.deep.equal(10);
+  });
+
 
 });

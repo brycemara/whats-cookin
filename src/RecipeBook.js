@@ -4,10 +4,9 @@ const Recipe = require('../src/Recipe')
 
 class RecipeBook {
   constructor() {
-    this.recipes = recipeData.map(recipe => {return new Recipe(recipe)});
+    this.recipeBook = recipeData.map(recipe => {return new Recipe(recipe)});
   }
 }
-
 
 if (typeof module !== 'undefined') {
   module.exports = RecipeBook;
