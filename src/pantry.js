@@ -15,6 +15,7 @@ class Pantry {
   //TODO: Refactor, talk to PM about refactor
   checkIngredients(recipe) {
     let requiredIngredients = recipe.ingredients.reduce((missingIngredients, ingredient) => {
+      //TODO: Break with helper function
       let pantryIngredient = this.contents.find(content => {
         return content.id === ingredient.id
       })
@@ -24,6 +25,7 @@ class Pantry {
       }
       let ingredientDiff = ingredient.recipeAmount.amount - pantryIngredient.pantryAmount;
       if (ingredientDiff >= 0) {
+        //TODO: Create ingredient instance!
         let missingIngredient = {
           name: ingredient.name,
           amountMissing: ingredientDiff
@@ -39,7 +41,7 @@ class Pantry {
 
   }
 
-  removeIngredients() {
+  removeUsedIngredients() {
 
   }
 }
