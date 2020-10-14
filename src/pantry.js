@@ -12,6 +12,7 @@ class Pantry {
     return ingredients;
   }
 
+  //TODO: Refactor, talk to PM about refactor
   checkIngredients(recipe) {
     let requiredIngredients = recipe.ingredients.reduce((missingIngredients, ingredient) => {
       let pantryIngredient = this.contents.find(content => {

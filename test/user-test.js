@@ -61,7 +61,7 @@ let recipe;
     user.addFavoriteRecipe(recipe);
     let result = user.searchFavoriteRecipes('Snakes');
     expect(result).to.be.an('array').that.is.empty;
-    result = user.searchFavoriteRecipes('Cookie');
+    result = user.searchFavoriteRecipes('cookie');
     expect(result).to.include(recipe);
   });
 
@@ -69,8 +69,13 @@ let recipe;
     user.addFavoriteRecipe(recipe);
     let result = user.searchFavoriteRecipes('Snakes');
     expect(result).to.be.an('array').that.is.empty;
-    result = user.searchFavoriteRecipes('wheat flour');
+    result = user.searchFavoriteRecipes('Wheat Flour');
     expect(result).to.include(recipe);
+  });
+
+  it('should filter recipes by type', () => {
+    let results = user.filterRecipes('antipasti');
+    expect(results.length).to.deep.equal(9);
   });
 
 

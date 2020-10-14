@@ -1,3 +1,6 @@
+const data = require('../data/recipes');
+const recipeData = data.recipeData;
+
 class User {
   constructor(userInfo) {
     this.id = userInfo.id;
@@ -26,12 +29,13 @@ class User {
   }
 
   searchFavoriteRecipes(recipeOrIngredient) {
+    let formattedRecipe = this.formatInput(recipeOrIngredient);
     let recipeResults = this.favoriteRecipes.filter(recipe => {
-      return recipe.name.includes(recipeOrIngredient);
+      return recipe.name.includes(formattedRecipe);
     });
     let ingredientResults = this.favoriteRecipes.reduce((acc, recipe) => {
       recipe.ingredients.forEach(ingredient => {
-        if (ingredient.name.includes(recipeOrIngredient)) {
+        if (ingredient.name.includes(recipeOrIngredient.toLowerCase())) {
           acc.push(recipe);
         }
       })
@@ -40,12 +44,27 @@ class User {
     return recipeResults.concat(ingredientResults);
   }
 
+  formatInput(input) {
+    let inputFormatted = input.toLowerCase();
+    inputFormatted = inputFormatted.charAt(0).toUpperCase() + inputFormatted.slice(1);
+    return inputFormatted;
+  }
+
   filterRecipes(type) {
-    // filter fav or to cook recipes by type
+    let recipeResults = recipeData.reduce((acc, recipe) => {
+      recipe.tags.forEach(tag => {
+        if (tag.includes(type)) {
+          acc.push(recipe);
+        }
+      })
+      return acc;
+    }, []);
+    return recipeResults;
   }
 
   searchByIngredient() {
-
+    // Can we use a recipeBook class here?
+    // recipeBook.recipe.ingredients.name
   }
 }
 
