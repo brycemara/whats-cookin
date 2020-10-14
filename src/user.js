@@ -1,6 +1,5 @@
-// const data = require('../data/recipes');
-// const recipeData = data.recipeData;
-const RecipeBook = require('../src/RecipeBook')
+const Pantry = require('../src/Pantry');
+const RecipeBook = require('../src/RecipeBook');
 
 class User {
   constructor(userInfo) {
@@ -8,7 +7,7 @@ class User {
     this.name = userInfo.name;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
-    this.pantry = userInfo.pantry;
+    this.pantry = new Pantry(userInfo.pantry);
     this.recipes = new RecipeBook();
   }
 
@@ -25,6 +24,11 @@ class User {
     this.recipesToCook.push(recipe);
   }
 
+  makeRecipeToCook(recipe) {
+    this.removeRecipeToCook(recipe);
+    this.pantry.removeUsedIngredients(recipe);
+  }
+
   removeRecipeToCook(recipe) {
     const index = this.recipesToCook.indexOf(recipe);
     this.recipesToCook.splice(index, 1);
@@ -36,14 +40,19 @@ class User {
       return recipe.name.includes(formattedRecipe);
     });
     let ingredientResults = this.favoriteRecipes.reduce((acc, recipe) => {
-      recipe.ingredients.forEach(ingredient => {
-        if (ingredient.name.includes(recipeOrIngredient.toLowerCase())) {
-          acc.push(recipe);
-        }
-      })
+      this.matchIngredientNames(acc, recipe, recipeOrIngredient);
       return acc;
-    }, [])
+    }, []);
     return recipeResults.concat(ingredientResults);
+  }
+
+  matchIngredientNames(acc, recipe, recipeOrIngredient) {
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredient.name.includes(recipeOrIngredient.toLowerCase())) {
+        acc.push(recipe);
+      };
+    });
+    return acc;
   }
 
   formatInput(input) {
@@ -57,8 +66,8 @@ class User {
       recipe.tags.forEach(tag => {
         if (tag.includes(type)) {
           acc.push(recipe);
-        }
-      })
+        };
+      });
       return acc;
     }, []);
     return recipeResults;
@@ -68,15 +77,15 @@ class User {
     let ingredientResults = this.recipes.recipeBook.reduce((acc, recipe) => {
       recipe.ingredients.forEach(ingredient => {
         if (ingredient.name.includes(name) && !acc.includes(recipe)) {
-          acc.push(recipe)
-        }
-      })
+          acc.push(recipe);
+        };
+      });
       return acc;
-    }, [])
+    }, []);
     return ingredientResults;
   }
-}
+};
 
 if (typeof module !== 'undefined') {
   module.exports = User;
-}
+};

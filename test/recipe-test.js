@@ -1,6 +1,6 @@
 const chai = require('chai');
-const expect = chai.expect;
 const data = require('../data/recipes');
+const expect = chai.expect;
 const recipeInfo = data.recipeData;
 
 const Recipe = require('../src/Recipe');

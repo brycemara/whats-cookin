@@ -1,4 +1,4 @@
-const Ingredient = require('../src/Ingredient')
+const Ingredient = require('../src/Ingredient');
 
 class Pantry {
   constructor(ingredientList) {
@@ -7,45 +7,61 @@ class Pantry {
 
   createNewIngredients(pantryIngredients) {
     let ingredients = pantryIngredients.map(ingredient => {
-      return new Ingredient(ingredient)
+      return new Ingredient(ingredient);
     });
     return ingredients;
   }
 
-  //TODO: Refactor, talk to PM about refactor
-  checkIngredients(recipe) {
+  getIngredientsNeeded(recipe) {
     let requiredIngredients = recipe.ingredients.reduce((missingIngredients, ingredient) => {
-      //TODO: Break with helper function
-      let pantryIngredient = this.contents.find(content => {
-        return content.id === ingredient.id
-      })
-      if (!pantryIngredient) {
-        pantryIngredient = ingredient;
-        pantryIngredient.pantryAmount = 0;
-      }
-      let ingredientDiff = ingredient.recipeAmount.amount - pantryIngredient.pantryAmount;
-      if (ingredientDiff >= 0) {
-        //TODO: Create ingredient instance!
-        let missingIngredient = {
-          name: ingredient.name,
-          amountMissing: ingredientDiff
-        };
+      let pantryIngredient = this.findPantryIngredient(ingredient);
+      let missingIngredient = this.createMissingIngredients(ingredient, pantryIngredient);
+      if (missingIngredient) {
         missingIngredients.push(missingIngredient);
       }
       return missingIngredients;
     }, []);
     return requiredIngredients;
-  }
-
-  needIngredients(recipe){
 
   }
 
-  removeUsedIngredients() {
-
+  createMissingIngredients(ingredient, pantryIngredient) {
+    let ingredientDiff = ingredient.recipeAmount.amount - pantryIngredient.pantryAmount;
+    if (ingredientDiff >= 0) {
+      let missingIngredient = new Ingredient(ingredient);
+      missingIngredient.pantryAmount = pantryIngredient.pantryAmount;
+      missingIngredient.recipeAmount = ingredient.recipeAmount.amount;
+      missingIngredient.amountMissing = ingredientDiff;
+      return missingIngredient;
+    }
   }
-}
+
+  findPantryIngredient(ingredient) {
+    let pantryIngredient = this.contents.find(content => {
+      return content.id === ingredient.id;
+    });
+    if (!pantryIngredient) {
+      pantryIngredient = ingredient;
+      pantryIngredient.pantryAmount = 0;
+    };
+    return pantryIngredient;
+  }
+
+  hasNeededIngredients(recipe){
+    return (this.getIngredientsNeeded(recipe).length > 0) ? false : true;
+  }
+
+  removeUsedIngredients(recipe) {
+    if (!this.hasNeededIngredients(recipe)) {
+      return false;
+    }
+    recipe.ingredients.forEach(ingredient => {
+      let pantryIngredient = this.findPantryIngredient(ingredient);
+      pantryIngredient.pantryAmount -= ingredient.recipeAmount.amount;
+    });
+  }
+};
 
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
-}
+};
