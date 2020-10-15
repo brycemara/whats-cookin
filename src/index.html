@@ -24,13 +24,25 @@
         <!-- Add tag widgets created dynamically from scripts.js -->
       </section>
     </header>
-    <section class="main-content">
+    <section id="search-display">
+      <div class="results-counter">
+        <p id="results-count">347 Results for Wheat Flour:</p>
+      </div>
+      <section id="search-results" class="main-content">
+        <div class="single-recipe-result">
+          <img id="small-dish-image" src="http://placeimg.com/640/480/any" alt="Recipe image">
+          <h3 id="recipe-name">Recipe Name</h3>
+          <p id="recipe-tags">Recipe Tag, Recipe Tag, Recipe Tag, Recipe Tag, Recipe Tag</p>
+        </div>
+      </section>
+    </section>
+    <section id="homepage" class="main-content hidden">
       <section class="pantry-items">
 
       </section>
       <section class="recipe-area">
         <div class="random-recipe-landing">
-          <img id="large-dish-image" src="http://placeimg.com/640/480/any" alt="">
+          <img id="large-dish-image" src="http://placeimg.com/640/480/any" alt="Recipe image">
           <h3 id="recipe-name">Recipe Name</h3>
         </div>
         <div class="search-results">
@@ -43,7 +55,7 @@
         </div>
         <div class="saved-log">
           <div class="saved-recipe">
-            <img id="saved-dish-image" src="http://placeimg.com/200/150/any" alt="">
+            <img id="small-dish-image" src="http://placeimg.com/200/150/any" alt="">
             <img id="icon-image" src="" alt="">
             <p>Recipe Card</p>
           </div>
