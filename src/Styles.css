@@ -2,7 +2,7 @@
 
 }
 
-header {
+.title-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,15 +12,32 @@ header {
 
 .main-content {
   display: flex;
-  border: solid 5px red;
+  border: solid 5px orange;
 
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.tag-widget {
+  height: 65px;
+  width: 100%;
+  border: solid green 5px;
+}
+
+.pantry-items {
+  display: flex;
+  width: 20vw;
+  border: solid 5px blue;
 }
 
 .recipe-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70vw;
+  width: 50vw;
   border: solid 5px red;
 }
 
@@ -52,5 +69,7 @@ header {
 }
 
 #large-dish-image {
-  width: auto;
+  position: relative;
+  width: 640px;
+  height: 480px;
 }
