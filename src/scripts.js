@@ -29,6 +29,9 @@ function searchAllRecipes() {
   displaySearchResults(userInput);
 }
 
+//TODO: Search results not displaying when searching for names
+//TODO: Update Search result count display
+
 function displaySearchResults(userInput) {
   let typeResults = currentUser.filterRecipes(userInput);
   let ingredientResults = currentUser.searchByIngredient(userInput);
