@@ -14,12 +14,13 @@ let searchButton = document.querySelector('.search-button');
 let randomRecipeName = document.querySelector('.random-recipe-name');
 let randomRecipeImage = document.getElementById('large-dish-image');
 let userPantryItems = document.querySelector('.pantry-items')
+let userName = document.querySelector('.user-name')
 
 searchButton.addEventListener('click', () => {displayRecipe(recipe)});
 
 // FOR HOME PAGE
 function displayOnPageLoad() {
-    getRandomUser();
+    displayUser();
     displayRandomRecipe();
     displayPantryItems();
 }
@@ -32,6 +33,11 @@ function getRandomUser() {
 function getRandomRecipe() {
   let recipeIndex = Math.floor(Math.random() * currentUser.recipes.recipeBook.length);
   currentRecipe = currentUser.recipes.recipeBook[recipeIndex];
+}
+
+function displayUser() {
+  getRandomUser()
+  userName.innerText = `Hello, ${currentUser.name}! Lets cook!`
 }
 
 function displayRandomRecipe() {

@@ -36,6 +36,12 @@
   border: solid green 5px;
 }
 
+.pantry-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .pantry-items {
   display: flex;
   width: 20vw;

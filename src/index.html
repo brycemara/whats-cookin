@@ -13,7 +13,7 @@
           <h1>Eat Me!</h1>
         </div>
         <div class="user-info">
-          <p>UserName</p>
+          <p class="user-name">UserName</p>
         </div>
       </section>
       <section class="search-bar">
@@ -24,8 +24,8 @@
         <!-- Add tag widgets created dynamically from scripts.js -->
       </section>
     </header>
-    <section class="main-content">
-      <section>
+    <section class="main-content hidden">
+      <section class="pantry-content">
         <h2>Your Pantry Items</h2>
         <p class="pantry-items"></p>
       </section>
@@ -38,10 +38,11 @@
         </div>
       </section>
       <section class="saved-want-area">
+        <h2>Favortied Recipes</h2>
         <div class="blank-log">
           <p>You have no saved recipes!</p>
         </div>
-        <div class="saved-log">
+        <div class="saved-log hidden">
           <div class="saved-recipe">
             <img id="saved-dish-image" src="http://placeimg.com/200/150/any" alt="">
             <img id="icon-image" src="" alt="">
@@ -50,7 +51,7 @@
         </div>
       </section>
     </section>
-    <section class="recipe-view hidden">
+    <section class="recipe-view">
       <div class="ingredients-view">
         <p> List Ingredients Here</p>
       </div>
