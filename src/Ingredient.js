@@ -1,6 +1,3 @@
-const data = require('../data/ingredients');
-const ingredientsData = data.ingredientsData;
-
 class Ingredient {
   constructor(ingredientDetails) {
     this.id = ingredientDetails.id || ingredientDetails.ingredient;

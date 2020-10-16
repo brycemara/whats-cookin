@@ -1,5 +1,3 @@
-const Ingredient = require('../src/Ingredient');
-
 class Pantry {
   constructor(ingredientList) {
     this.contents = this.createNewIngredients(ingredientList);

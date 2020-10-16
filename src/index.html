@@ -18,7 +18,7 @@
       </section>
       <section class="search-bar">
         <input type="text" name="search" value="">
-        <button type="button" name="search-button">Search!</button>
+        <button type="button" class="search-button">Search!</button>
       </section>
       <section class="tag-widget">
         <!-- Add tag widgets created dynamically from scripts.js -->
@@ -62,9 +62,24 @@
         </div>
       </section>
     </section>
+    <section class="recipe-view">
+      <div class="ingredients-view">
+        <p> List Ingredients Here</p>
+      </div>
+      <div class="recipe-details">
+        <h1 class="recipe-name">Recipe Name</h1>
+        <img id="recipe-img" src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="">
+        <p class="recipe-instructions">Instructions</p>
+      </div>
+    </section>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
+    <script type="text/javascript" src="./Ingredient.js"></script>
+    <script type="text/javascript" src="./Recipe.js"></script>
+    <script type="text/javascript" src="./Pantry.js"></script>
+    <script type="text/javascript" src="./RecipeBook.js"></script>
+    <script type="text/javascript" src="./User.js"></script>
     <script type="text/javascript" src="./scripts.js"></script>
   </body>
 </html>
