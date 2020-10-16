@@ -1,10 +1,5 @@
 let currentUser;
 let currentRecipe;
-
-window.onload = () => {
-  displayOnPageLoad();
-}
-
 let ingredientList = document.querySelector('.ingredients-view');
 let recipeName = document.querySelector('.recipe-name');
 let recipeView = document.querySelector('.recipe-view');
@@ -16,7 +11,12 @@ let randomRecipeImage = document.getElementById('large-dish-image');
 let userPantryItems = document.querySelector('.pantry-items')
 let userName = document.querySelector('.user-name')
 
+
+window.onload = () => {
+  displayOnPageLoad();
+}
 searchButton.addEventListener('click', () => {displayRecipe(recipe)});
+
 
 // FOR HOME PAGE
 function displayOnPageLoad() {
