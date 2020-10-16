@@ -101,6 +101,6 @@
 
 #large-dish-image {
   position: relative;
-  width: 640px;
-  height: 480px;
+  width: 100%;
+  height: 100%;
 }
