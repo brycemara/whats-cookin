@@ -1,5 +1,4 @@
 let currentUser;
-// let currentRecipe;
 let ingredientList = document.querySelector('.ingredients-view');
 let recipeName = document.querySelector('.recipe-name');
 let recipeView = document.querySelector('.recipe-view');
@@ -19,7 +18,6 @@ window.onload = () => {
 }
 
 let searchDisplay = document.getElementById('search-results');
-// randomRecipeImg.addEventListener('click', getDomRecipe);
 searchButton.addEventListener('click', searchAllRecipes);
 
 // FOR HOME PAGE
@@ -29,10 +27,6 @@ function displayOnPageLoad() {
     displayPantryItems();
 }
 
-// function getDomRecipe() {
-//   console.log(currentRecipe);
-// }
-
 function getRandomUser() {
   let userIndex = Math.floor(Math.random() * usersData.length);
   currentUser = new User(usersData[userIndex]);
@@ -40,7 +34,7 @@ function getRandomUser() {
 
 function getRandomRecipe() {
   let recipeIndex = Math.floor(Math.random() * currentUser.recipes.recipeBook.length);
-  return currentRecipe = currentUser.recipes.recipeBook[recipeIndex];
+  return currentUser.recipes.recipeBook[recipeIndex];
 }
 
 function displayUser() {
@@ -85,7 +79,6 @@ function toggleView(viewToShow) {
 function displayChosenRecipe(recipeId) {
   toggleView(recipeView);
   let recipe = getRecipeObject(recipeId);
-  console.log(recipe);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
   ingredientList.innerText = recipe.ingredients;
@@ -100,10 +93,6 @@ function searchAllRecipes() {
   displaySearchResults(userInput);
 }
 
-//TODO: Search results not displaying when searching for names
-//TODO: Update Search result count display
-//TODO: Formatting for user input
-
 function displaySearchResults(userInput) {
   let typeResults = currentUser.filterRecipes(userInput);
   let ingredientResults = currentUser.searchByIngredient(userInput);
@@ -113,10 +102,6 @@ function displaySearchResults(userInput) {
   searchResults.forEach(result => {
     createHtmlRecipeBlock(result);
   })
-}
-
-function showMe(result) {
-  console.log(result);
 }
 
 function getRecipeObject(recipeId) {
