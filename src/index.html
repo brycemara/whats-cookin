@@ -22,27 +22,16 @@
         <button id="search-favorite-button "type="button" class="search-button">Search Favorites!</button>
       </section>
       <section class="tag-widget">
-        <!-- Add tag widgets created dynamically from scripts.js -->
       </section>
     </header>
-    <section class="main-content hidden">
-    <section id="search-display">
-      <div class="results-counter">
-        <p id="results-count">347 Results for Wheat Flour:</p>
-      </div>
-      <section id="search-results" class="main-content">
-        <h1>Sorry, no matches to display.</h1>
-      </section>
-    </section>
-    <section id="homepage" class="main-content hidden">
+    <section id="homepage" class="main-content">
       <section class="pantry-content">
         <h2>Your Pantry Items</h2>
         <p class="pantry-items"></p>
       </section>
       <section class="recipe-area">
         <div class="random-recipe-landing">
-          <img id="large-dish-image" src="http://placeimg.com/640/480/any" alt="Recipe image">
-          <h3 id="recipe-name">Recipe Name</h3>
+          <img id="large-dish-image" onclick="" src="http://placeimg.com/640/480/any" alt="Recipe image">
         </div>
         <div class="random-recipe-name">
           <h3 id="recipe-name">Recipe Name</h3>
@@ -62,7 +51,15 @@
         </div>
       </section>
     </section>
-    <section class="recipe-view">
+    <section id="search-display" class="main-content hidden">
+      <div class="results-counter">
+        <p id="results-count">347 Results for Wheat Flour:</p>
+      </div>
+      <section id="search-results">
+        <h1>Sorry, no matches to display.</h1>
+      </section>
+    </section>
+    <section id="recipe-view" class="recipe-view hidden">
       <div class="ingredients-view">
         <p> List Ingredients Here</p>
       </div>
