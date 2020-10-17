@@ -8,7 +8,9 @@ class User {
     this.recipes = new RecipeBook();
   }
 
-  addFavoriteRecipe(recipe) {
+  addFavoriteRecipe(recipeId) {
+    let recipe = getRecipeObject(recipeId);
+    if (this.favoriteRecipes.includes(recipe)) return;
     this.favoriteRecipes.push(recipe);
   }
 
@@ -17,7 +19,9 @@ class User {
     this.favoriteRecipes.splice(index, 1);
   }
 
-  addRecipeToCook(recipe) {
+  addRecipeToCook(recipeId) {
+    let recipe = getRecipeObject(recipeId);
+    if (this.recipesToCook.includes(recipe)) return;
     this.recipesToCook.push(recipe);
   }
 

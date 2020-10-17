@@ -1,23 +1,24 @@
 let currentUser;
+let homeView = document.getElementById('homepage');
 let ingredientList = document.querySelector('.ingredients-view');
+let randomRecipeImage = document.getElementById('large-dish-image');
+let randomRecipeImg = document.getElementById('large-dish-image')
+let randomRecipeName = document.getElementById('recipe-name');
+let recipeImg = document.getElementById('recipe-img');
+let recipeInstructions = document.querySelector('.recipe-instructions');
 let recipeName = document.querySelector('.recipe-name');
 let recipeView = document.querySelector('.recipe-view');
-let recipeInstructions = document.querySelector('.recipe-instructions');
-let recipeImg = document.getElementById('recipe-img');
-let searchView = document.getElementById('search-display');
-let homeView = document.getElementById('homepage');
-let randomRecipeImg = document.getElementById('large-dish-image')
 let searchButton = document.querySelector('.search-button');
-let randomRecipeName = document.getElementById('recipe-name');
-let randomRecipeImage = document.getElementById('large-dish-image');
-let userPantryItems = document.querySelector('.pantry-items')
-let userName = document.querySelector('.user-name')
+let searchDisplay = document.getElementById('search-results');
+let searchView = document.getElementById('search-display');
+let userName = document.querySelector('.user-name');
+let userPantryItems = document.querySelector('.pantry-items');
+let favoritesView = document.querySelector('.saved-log');
 
 window.onload = () => {
   displayOnPageLoad();
 }
 
-let searchDisplay = document.getElementById('search-results');
 searchButton.addEventListener('click', searchAllRecipes);
 
 // FOR HOME PAGE
@@ -25,6 +26,23 @@ function displayOnPageLoad() {
     displayUser();
     displayRandomRecipe();
     displayPantryItems();
+}
+
+function displayHomepage () {
+  toggleView(homeView);
+  displaySavedRecipes();
+}
+
+function displaySavedRecipes() {
+  favoritesView.innerHTML = "<p>You have no saved or favortied recipes.</p>";
+  if (!currentUser.recipesToCook && !currentUser.favoriteRecipes) return;
+  favoritesView.innerHTML = "";
+  currentUser.recipesToCook.forEach(recipe => {
+    favoritesView.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe));
+  });
+  currentUser.favoriteRecipes.forEach(recipe => {
+    favoritesView.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe));
+  });
 }
 
 function getRandomUser() {
@@ -100,7 +118,7 @@ function displaySearchResults(userInput) {
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
   searchResults.forEach(result => {
-    createHtmlRecipeBlock(result);
+    searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
   })
 }
 
@@ -108,13 +126,16 @@ function getRecipeObject(recipeId) {
   return currentUser.recipes.recipeBook.find(recipe => recipe.id === recipeId);
 }
 
-function createHtmlRecipeBlock(result) {
-  const recipeBlock = `
-    <div class="single-recipe-result" onclick="displayChosenRecipe(${result.id})">
-      <img id="small-dish-image" src=${result.image} alt="Recipe ${result.id}">
-      <h3 id="recipe-name-card">${result.name}</h3>
-      <p id="recipe-tags-card">${result.tags}</p>
+function createHtmlRecipeBlock(recipe) {
+  return recipeBlock = `
+    <div class="single-recipe-result">
+      <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
+      <h3 id="recipe-name-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.name}</h3>
+      <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.tags}</p>
+      <div class="circle" id="chef-icon"></div>
+        <img class="icon" id="chef-icon" src="../assets/chef.svg" onclick="currentUser.addRecipeToCook(${recipe.id})">
+      <div class="circle" id="heart-icon"></div>
+        <img class="icon" id="heart-icon" src="../assets/heart.svg" onclick="currentUser.addFavoriteRecipe(${recipe.id})">
     </div>
-  `
-  searchDisplay.insertAdjacentHTML('beforeend', recipeBlock);
+  `;
 }
