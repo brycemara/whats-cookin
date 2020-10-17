@@ -52,7 +52,7 @@ function displayRandomRecipe() {
   let currentRecipe = getRandomRecipe();
   randomRecipeName.innerText = currentRecipe.name;
   randomRecipeImage.src = currentRecipe.image;
-  randomRecipeImage.setAttribute("onclick", "displayChosenRecipe(currentRecipe)");
+  randomRecipeImage.setAttribute("onclick", `displayChosenRecipe(${currentRecipe.id})`);
   userPantryItems.innerText = currentUser.pantry;
 }
 
@@ -82,8 +82,10 @@ function toggleView(viewToShow) {
   viewToShow.classList.remove('hidden');
 }
 
-function displayChosenRecipe(recipe) {
+function displayChosenRecipe(recipeId) {
   toggleView(recipeView);
+  let recipe = getRecipeObject(recipeId);
+  console.log(recipe);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
   ingredientList.innerText = recipe.ingredients;
@@ -91,6 +93,7 @@ function displayChosenRecipe(recipe) {
 }
 
 function searchAllRecipes() {
+  toggleView(searchView);
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
   let userInput = document.getElementById('user-search-texbox').value
   if (!userInput) return;
@@ -104,7 +107,7 @@ function searchAllRecipes() {
 function displaySearchResults(userInput) {
   let typeResults = currentUser.filterRecipes(userInput);
   let ingredientResults = currentUser.searchByIngredient(userInput);
-  searchResults = typeResults.concat(ingredientResults);
+  let searchResults = typeResults.concat(ingredientResults);
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
   searchResults.forEach(result => {
@@ -112,9 +115,17 @@ function displaySearchResults(userInput) {
   })
 }
 
+function showMe(result) {
+  console.log(result);
+}
+
+function getRecipeObject(recipeId) {
+  return currentUser.recipes.recipeBook.find(recipe => recipe.id === recipeId);
+}
+
 function createHtmlRecipeBlock(result) {
   const recipeBlock = `
-    <div class="single-recipe-result">
+    <div class="single-recipe-result" onclick="displayChosenRecipe(${result.id})">
       <img id="small-dish-image" src=${result.image} alt="Recipe ${result.id}">
       <h3 id="recipe-name-card">${result.name}</h3>
       <p id="recipe-tags-card">${result.tags}</p>
