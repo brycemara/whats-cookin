@@ -17,20 +17,29 @@
         </div>
       </section>
       <section class="search-bar">
-        <input type="text" name="search" value="">
-        <button type="button" name="search-button">Search!</button>
+        <input id="user-search-texbox" type="text" name="search" value="">
+        <button id="search-all-button"type="button" class="search-button">Search All Recipes!</button>
+        <button id="search-favorite-button "type="button" class="search-button">Search Favorites!</button>
       </section>
       <section class="tag-widget">
         <!-- Add tag widgets created dynamically from scripts.js -->
       </section>
     </header>
-    <section class="main-content">
+    <section id="search-display">
+      <div class="results-counter">
+        <p id="results-count">347 Results for Wheat Flour:</p>
+      </div>
+      <section id="search-results" class="main-content">
+        <h1>Sorry, no matches to display.</h1>
+      </section>
+    </section>
+    <section id="homepage" class="main-content hidden">
       <section class="pantry-items">
 
       </section>
       <section class="recipe-area">
         <div class="random-recipe-landing">
-          <img id="large-dish-image" src="http://placeimg.com/640/480/any" alt="">
+          <img id="large-dish-image" src="http://placeimg.com/640/480/any" alt="Recipe image">
           <h3 id="recipe-name">Recipe Name</h3>
         </div>
         <div class="search-results">
@@ -43,16 +52,31 @@
         </div>
         <div class="saved-log">
           <div class="saved-recipe">
-            <img id="saved-dish-image" src="http://placeimg.com/200/150/any" alt="">
+            <img id="small-dish-image" src="http://placeimg.com/200/150/any" alt="">
             <img id="icon-image" src="" alt="">
             <p>Recipe Card</p>
           </div>
         </div>
       </section>
     </section>
+    <section class="recipe-view">
+      <div class="ingredients-view">
+        <p> List Ingredients Here</p>
+      </div>
+      <div class="recipe-details">
+        <h1 class="recipe-name">Recipe Name</h1>
+        <img id="recipe-img" src="https://spoonacular.com/recipeImages/595736-556x370.jpg" alt="">
+        <p class="recipe-instructions">Instructions</p>
+      </div>
+    </section>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
+    <script type="text/javascript" src="./Ingredient.js"></script>
+    <script type="text/javascript" src="./Recipe.js"></script>
+    <script type="text/javascript" src="./Pantry.js"></script>
+    <script type="text/javascript" src="./RecipeBook.js"></script>
+    <script type="text/javascript" src="./User.js"></script>
     <script type="text/javascript" src="./scripts.js"></script>
   </body>
 </html>

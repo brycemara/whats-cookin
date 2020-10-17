@@ -1,6 +1,3 @@
-const Pantry = require('../src/Pantry');
-const RecipeBook = require('../src/RecipeBook');
-
 class User {
   constructor(userInfo) {
     this.id = userInfo.id;
