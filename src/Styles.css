@@ -137,11 +137,11 @@
   justify-content: center;
 }
 
-#chef-icon {
+.chef-icon {
   right: 0px;
 }
 
-#heart-icon {
+.heart-icon {
   left: 0px;
 }
 

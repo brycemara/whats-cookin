@@ -126,16 +126,46 @@ function getRecipeObject(recipeId) {
   return currentUser.recipes.recipeBook.find(recipe => recipe.id === recipeId);
 }
 
+function updateFavoriteRecipe(recipeId) {
+  let recipe = getRecipeObject(recipeId);
+  if (currentUser.favoriteRecipes.includes(recipe)) {
+    currentUser.removeFavoriteRecipe(recipe);
+  } else {
+    currentUser.addFavoriteRecipe(recipe);
+  }
+  toggleIcon('heart', recipeId);
+}
+
+function updateCookLaterRecipe(recipeId) {
+  let recipe = getRecipeObject(recipeId);
+  if (currentUser.recipesToCook.includes(recipe)) {
+    currentUser.removeRecipeToCook(recipe);
+  } else {
+    currentUser.addRecipeToCook(recipe);
+  }
+  toggleIcon('chef', recipeId);
+}
+
+function toggleIcon(icon, recipeId) {
+  let currentIcon = document.getElementById(`${icon}-${recipeId}`)
+  if (currentIcon.getAttribute('src') === `../assets/${icon}.svg`) {
+    currentIcon.setAttribute('src', `../assets/${icon}-clicked.svg`);
+  } else {
+    currentIcon.setAttribute('src', `../assets/${icon}.svg`);
+  }
+}
+
 function createHtmlRecipeBlock(recipe) {
-  return recipeBlock = `
+  let recipeBlock = `
     <div class="single-recipe-result">
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
       <h3 id="recipe-name-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.name}</h3>
       <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.tags}</p>
-      <div class="circle" id="chef-icon"></div>
-        <img class="icon" id="chef-icon" src="../assets/chef.svg" onclick="currentUser.addRecipeToCook(${recipe.id})">
-      <div class="circle" id="heart-icon"></div>
-        <img class="icon" id="heart-icon" src="../assets/heart.svg" onclick="currentUser.addFavoriteRecipe(${recipe.id})">
+      <div class="circle"></div>
+        <img class="icon chef-icon" id="chef-${recipe.id}" src="../assets/chef.svg" onclick="updateCookLaterRecipe(${recipe.id})">
+      <div class="circle"></div>
+        <img class="icon heart-icon" id="heart-${recipe.id}" src="../assets/heart.svg" onclick="updateFavoriteRecipe(${recipe.id})">
     </div>
   `;
+  return recipeBlock;
 }

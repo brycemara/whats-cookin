@@ -8,19 +8,18 @@ class User {
     this.recipes = new RecipeBook();
   }
 
-  addFavoriteRecipe(recipeId) {
-    let recipe = getRecipeObject(recipeId);
+  addFavoriteRecipe(recipe) {
     if (this.favoriteRecipes.includes(recipe)) return;
     this.favoriteRecipes.push(recipe);
   }
 
+  //TODO: Fix to intake recipeID
   removeFavoriteRecipe(recipe) {
     const index = this.favoriteRecipes.indexOf(recipe);
     this.favoriteRecipes.splice(index, 1);
   }
 
-  addRecipeToCook(recipeId) {
-    let recipe = getRecipeObject(recipeId);
+  addRecipeToCook(recipe) {
     if (this.recipesToCook.includes(recipe)) return;
     this.recipesToCook.push(recipe);
   }
