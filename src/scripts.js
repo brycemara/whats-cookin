@@ -37,10 +37,9 @@ function displaySavedRecipes() {
   favoritesView.innerHTML = "<p>You have no saved or favortied recipes.</p>";
   if (!currentUser.recipesToCook && !currentUser.favoriteRecipes) return;
   favoritesView.innerHTML = "";
-  currentUser.recipesToCook.forEach(recipe => {
-    favoritesView.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe));
-  });
-  currentUser.favoriteRecipes.forEach(recipe => {
+  let savedRecipes = currentUser.recipesToCook.concat(currentUser.favoriteRecipes);
+  savedRecipes = Array.from(new Set(savedRecipes));
+  savedRecipes.forEach(recipe => {
     favoritesView.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe));
   });
 }
@@ -117,6 +116,7 @@ function displaySearchResults(userInput) {
   let searchResults = typeResults.concat(ingredientResults);
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
+  console.log(searchResults);
   searchResults.forEach(result => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
   })
@@ -133,6 +133,7 @@ function updateFavoriteRecipe(recipeId) {
   } else {
     currentUser.addFavoriteRecipe(recipe);
   }
+  // debugger;
   toggleIcon('heart', recipeId);
 }
 
@@ -147,8 +148,9 @@ function updateCookLaterRecipe(recipeId) {
 }
 
 function toggleIcon(icon, recipeId) {
+  console.log(icon, recipeId);
   let currentIcon = document.getElementById(`${icon}-${recipeId}`)
-  if (currentIcon.getAttribute('src') === `../assets/${icon}.svg`) {
+  if (currentIcon.getAttribute('src') == `../assets/${icon}.svg`) {
     currentIcon.setAttribute('src', `../assets/${icon}-clicked.svg`);
   } else {
     currentIcon.setAttribute('src', `../assets/${icon}.svg`);
@@ -156,15 +158,17 @@ function toggleIcon(icon, recipeId) {
 }
 
 function createHtmlRecipeBlock(recipe) {
+  let favHighlight = "";
+  let cookHighlight = "";
+  if (currentUser.favoriteRecipes.includes(recipe)) favHighlight = "-clicked";
+  if (currentUser.recipesToCook.includes(recipe)) cookHighlight = "-clicked";
   let recipeBlock = `
     <div class="single-recipe-result">
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
       <h3 id="recipe-name-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.name}</h3>
       <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.tags}</p>
-      <div class="circle"></div>
-        <img class="icon chef-icon" id="chef-${recipe.id}" src="../assets/chef.svg" onclick="updateCookLaterRecipe(${recipe.id})">
-      <div class="circle"></div>
-        <img class="icon heart-icon" id="heart-${recipe.id}" src="../assets/heart.svg" onclick="updateFavoriteRecipe(${recipe.id})">
+      <img class="icon chef-icon" id="chef-${recipe.id}" src="../assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
+      <img class="icon heart-icon" id="heart-${recipe.id}" src="../assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
     </div>
   `;
   return recipeBlock;
