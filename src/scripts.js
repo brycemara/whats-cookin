@@ -31,13 +31,13 @@ function searchAllRecipes() {
 
 //TODO: Search results not displaying when searching for names
 //TODO: Update Search result count display
+//TODO: Formatting for user input
 
 function displaySearchResults(userInput) {
   let typeResults = currentUser.filterRecipes(userInput);
   let ingredientResults = currentUser.searchByIngredient(userInput);
   searchResults = typeResults.concat(ingredientResults);
   if (searchResults.length === 0) return;
-  console.log(searchResults);
   searchDisplay.innerHTML = '';
   searchResults.forEach(result => {
     createHtmlRecipeBlock(result);
