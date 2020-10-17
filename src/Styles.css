@@ -36,6 +36,12 @@
   border: solid green 5px;
 }
 
+.pantry-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .pantry-items {
   display: flex;
   width: 20vw;
@@ -141,6 +147,6 @@
 
 #large-dish-image {
   position: relative;
-  width: 640px;
-  height: 480px;
+  width: 100%;
+  height: 100%;
 }

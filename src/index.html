@@ -13,7 +13,7 @@
           <h1>Eat Me!</h1>
         </div>
         <div class="user-info">
-          <p>UserName</p>
+          <p class="user-name">UserName</p>
         </div>
       </section>
       <section class="search-bar">
@@ -25,6 +25,7 @@
         <!-- Add tag widgets created dynamically from scripts.js -->
       </section>
     </header>
+    <section class="main-content hidden">
     <section id="search-display">
       <div class="results-counter">
         <p id="results-count">347 Results for Wheat Flour:</p>
@@ -34,23 +35,25 @@
       </section>
     </section>
     <section id="homepage" class="main-content hidden">
-      <section class="pantry-items">
-
+      <section class="pantry-content">
+        <h2>Your Pantry Items</h2>
+        <p class="pantry-items"></p>
       </section>
       <section class="recipe-area">
         <div class="random-recipe-landing">
           <img id="large-dish-image" src="http://placeimg.com/640/480/any" alt="Recipe image">
           <h3 id="recipe-name">Recipe Name</h3>
         </div>
-        <div class="search-results">
-          <p>RECIPES HERE</p>
+        <div class="random-recipe-name">
+          <h3 id="recipe-name">Recipe Name</h3>
         </div>
       </section>
       <section class="saved-want-area">
+        <h2>Favortied Recipes</h2>
         <div class="blank-log">
           <p>You have no saved recipes!</p>
         </div>
-        <div class="saved-log">
+        <div class="saved-log hidden">
           <div class="saved-recipe">
             <img id="small-dish-image" src="http://placeimg.com/200/150/any" alt="">
             <img id="icon-image" src="" alt="">
