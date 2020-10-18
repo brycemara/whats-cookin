@@ -93,13 +93,24 @@ function toggleView(viewToShow) {
   viewToShow.classList.remove('hidden');
 }
 
+function formatInstructions(recipe) {
+  let formattedInstructions = '';
+  recipe.instructions.forEach(instruction => {
+    formattedInstructions +=
+    `Step${instruction.number} : ${instruction.instruction}
+
+    `;
+  })
+  return formattedInstructions;
+}
+
 function displayChosenRecipe(recipeId) {
   toggleView(recipeView);
   let recipe = getRecipeObject(recipeId);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
   ingredientList.innerText = recipe.ingredients;
-  recipeInstructions.innerText = recipe.instructions;
+  recipeInstructions.innerText = formatInstructions(recipe);
 }
 
 function searchAllRecipes() {
