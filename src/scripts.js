@@ -1,6 +1,6 @@
 let currentUser;
 let homeView = document.getElementById('homepage');
-let ingredientList = document.querySelector('.ingredients-view');
+let ingredientList = document.querySelector('.recipe-ingredients');
 let randomRecipeImage = document.getElementById('large-dish-image');
 let randomRecipeImg = document.getElementById('large-dish-image')
 let randomRecipeName = document.getElementById('recipe-name');
@@ -104,12 +104,25 @@ function formatInstructions(recipe) {
   return formattedInstructions;
 }
 
+function formatIngreidents(recipe) {
+  let formattedIngreidents = '';
+  recipe.ingredients.forEach(ingredient => {
+    formattedIngreidents +=
+    `Name: ${ingredient.name}
+    Amount: ${ingredient.recipeAmount.amount}
+    Unit: ${ingredient.recipeAmount.unit}
+
+    `;
+  })
+  return formattedIngreidents;
+}
+
 function displayChosenRecipe(recipeId) {
   toggleView(recipeView);
   let recipe = getRecipeObject(recipeId);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
-  ingredientList.innerText = recipe.ingredients;
+  ingredientList.innerText = formatIngreidents(recipe);
   recipeInstructions.innerText = formatInstructions(recipe);
 }
 

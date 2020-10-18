@@ -6,6 +6,11 @@
   display: none !important;
 }
 
+h3 {
+  display: flex;
+  justify-content: center;
+}
+
 .circle {
   position: absolute;
   height: 50px;
@@ -15,8 +20,9 @@
   z-index: 1;
 }
 
-.ingredients-view {
-  text-align: center;
+.recipe-ingredients {
+  display: flex;
+  justify-content: center;
   width: 30vw;
   padding: 30px;
   border: solid 5px red;
