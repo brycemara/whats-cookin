@@ -62,18 +62,6 @@ class User {
     return inputFormatted;
   }
 
-  filterRecipeType(type) {
-    let recipeResults = this.recipes.recipeBook.reduce((acc, recipe) => {
-      recipe.tags.forEach(tag => {
-        if (tag.includes(type)) {
-          acc.push(recipe);
-        };
-      });
-      return acc;
-    }, []);
-    return recipeResults;
-  }
-
   searchByIngredient(name) {
     let ingredientResults = this.recipes.recipeBook.reduce((acc, recipe) => {
       recipe.ingredients.forEach(ingredient => {
@@ -86,17 +74,24 @@ class User {
     return ingredientResults;
   }
 
-  searchAllRecipes(nameOrType) {
-    let formattedRecipeName = this.formatInput(nameOrType);
-    let recipeResults = this.recipes.recipeBook.filter(recipe => {
+  searchRecipeByName(name) {
+    let formattedRecipeName = this.formatInput(name);
+    return this.recipes.recipeBook.filter(recipe => {
       return recipe.name.includes(formattedRecipeName);
     });
-    let typeResults = this.filterRecipeType(nameOrType.toLowerCase());
+  }
+
+  searchRecipeType(type) {
+    let typeName = type.toLowerCase();
+    return this.recipes.recipeBook.filter(recipe => {
+      return recipe.tags.includes(typeName);
+    });
+  }
+
+  searchAllRecipes(nameOrType) {
+    let recipeResults = this.searchRecipeByName(nameOrType);
+    let typeResults = this.searchRecipeType(nameOrType);
     let ingredientResults = this.searchByIngredient(nameOrType.toLowerCase());
-    // let formattedIngredientName = name.toLowerCase();
-    // let typeResults = this.recipes.recipeBook.filter(recipe => {
-    //   return recipe.tags.includes(formattedIngredientName);
-    // });
     let results = recipeResults.concat(typeResults, ingredientResults);
     return Array.from(new Set(results));
   }
