@@ -14,8 +14,10 @@ let searchView = document.getElementById('search-display');
 let userName = document.querySelector('.user-name');
 let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
+let userSearchInput = document.getElementById('user-search-texbox');
 let searchFavButton = document.getElementById('search-favorite-button');
 let favoriteRecipeLink = document.querySelector('.link');
+
 
 window.onload = () => {
   displayOnPageLoad();
@@ -33,6 +35,7 @@ function displayOnPageLoad() {
 }
 
 function displayHomepage () {
+  userSearchInput.value = "";
   toggleView(homeView);
   displaySavedRecipes();
 }
@@ -122,6 +125,7 @@ function formatIngreidents(recipe) {
 }
 
 function displayChosenRecipe(recipeId) {
+  userSearchInput.value = "";
   toggleView(recipeView);
   let recipe = getRecipeObject(recipeId);
   recipeName.innerText = recipe.name;
@@ -133,7 +137,8 @@ function displayChosenRecipe(recipeId) {
 function searchAllRecipes() {
   toggleView(searchView);
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
-  let userInput = document.getElementById('user-search-texbox').value
+  let userInput = userSearchInput.value;
+  userSearchInput.value = "";
   if (!userInput) return;
   displaySearchResults(userInput);
 }
@@ -216,8 +221,12 @@ function toggleIcon(icon, recipeId) {
 function createHtmlRecipeBlock(recipe) {
   let favHighlight = "";
   let cookHighlight = "";
-  if (currentUser.favoriteRecipes.includes(recipe)) favHighlight = "-clicked";
-  if (currentUser.recipesToCook.includes(recipe)) cookHighlight = "-clicked";
+  if (currentUser.favoriteRecipes.includes(recipe)) {
+    favHighlight = "-clicked";
+  }
+  if (currentUser.recipesToCook.includes(recipe)) {
+    cookHighlight = "-clicked";
+  }
   let recipeBlock = `
     <div class="single-recipe-result">
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
