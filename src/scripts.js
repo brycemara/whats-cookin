@@ -8,18 +8,20 @@ let recipeImg = document.getElementById('recipe-img');
 let recipeInstructions = document.querySelector('.recipe-instructions');
 let recipeName = document.querySelector('.recipe-name');
 let recipeView = document.querySelector('.recipe-view');
-let searchButton = document.querySelector('.search-button');
+let searchButton = document.getElementById('search-all-button');
 let searchDisplay = document.getElementById('search-results');
 let searchView = document.getElementById('search-display');
 let userName = document.querySelector('.user-name');
 let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
+let searchFavButton = document.getElementById('search-favorite-button');
 
 window.onload = () => {
   displayOnPageLoad();
 }
 
 searchButton.addEventListener('click', searchAllRecipes);
+searchFavButton.addEventListener('click', searchFavoriteRecipes);
 
 // FOR HOME PAGE
 function displayOnPageLoad() {
@@ -134,13 +136,25 @@ function searchAllRecipes() {
   displaySearchResults(userInput);
 }
 
+function searchFavoriteRecipes() {
+  toggleView(searchView);
+  searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
+  let userInput = document.getElementById('user-search-texbox').value;
+  if (!userInput) return;
+  let favoriteResults = currentUser.searchFavoriteRecipes(userInput);
+  if (favoriteResults.length === 0) return;
+  searchDisplay.innerHTML = '';
+  favoriteResults.forEach(result => {
+    searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
+  })
+}
+
 function displaySearchResults(userInput) {
   let typeResults = currentUser.filterRecipes(userInput);
   let ingredientResults = currentUser.searchByIngredient(userInput);
   let searchResults = typeResults.concat(ingredientResults);
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
-  console.log(searchResults);
   searchResults.forEach(result => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
   })
