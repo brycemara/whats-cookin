@@ -130,9 +130,22 @@ h3 {
   border: lightgrey 1px solid;
 }
 
+.chef-icon {
+  right: 0px;
+}
+
+.heart-icon {
+  left: 0px;
+}
+
 #results-count {
   font-size: 20px;
   font-style: italic;
+  margin: 15px;
+}
+#search-display {
+  display: flex;
+  flex-direction: column;
 }
 
 #search-results {
@@ -141,14 +154,6 @@ h3 {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.chef-icon {
-  right: 0px;
-}
-
-.heart-icon {
-  left: 0px;
 }
 
 #search-results > *:hover {
