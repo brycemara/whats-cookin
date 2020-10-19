@@ -155,11 +155,18 @@ function displaySearchResults(userInput) {
   let typeResults = currentUser.filterRecipes(userInput);
   let ingredientResults = currentUser.searchByIngredient(userInput);
   let searchResults = typeResults.concat(ingredientResults);
+  updateSearchResultsCount(userInput, searchResults.length);
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
   searchResults.forEach(result => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
   })
+}
+
+
+function updateSearchResultsCount(userInput, resultsCount) {
+  let counterDisplay = document.getElementById('results-count');
+  counterDisplay.innerText = `${resultsCount} Results for '${userInput}'`;
 }
 
 function displayFavoritedRecipes() {
@@ -168,6 +175,7 @@ function displayFavoritedRecipes() {
   currentUser.favoriteRecipes.forEach(recipe => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe))
   })
+
 }
 
 function getRecipeObject(recipeId) {
