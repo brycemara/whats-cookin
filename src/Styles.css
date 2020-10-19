@@ -6,8 +6,23 @@
   display: none !important;
 }
 
-.ingredients-view {
-  text-align: center;
+h3 {
+  display: flex;
+  justify-content: center;
+}
+
+.circle {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  color: white;
+  z-index: 1;
+}
+
+.recipe-ingredients {
+  display: flex;
+  justify-content: center;
   width: 30vw;
   padding: 30px;
   border: solid 5px red;
@@ -34,6 +49,18 @@
   height: 65px;
   width: 100%;
   border: solid green 5px;
+}
+
+.icon {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  z-index: 5;
+  margin: 10px;
+}
+
+.icon:hover {
+  box-shadow: 0px 0px 10px #fff;
 }
 
 .pantry-content {
@@ -109,10 +136,19 @@
 }
 
 #search-results {
+  z-index: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.chef-icon {
+  right: 0px;
+}
+
+.heart-icon {
+  left: 0px;
 }
 
 #search-results > *:hover {
@@ -120,19 +156,22 @@
 }
 
 #recipe-name-card {
+  cursor: pointer;
   position: absolute;
   bottom: 70px;
   margin: 15px;
 }
 
 #recipe-tags-card {
+  cursor: pointer;
   font-style: italic;
   position: absolute;
   bottom: 25px;
   margin: 15px;
 }
 
-#small-dish-image{
+#small-dish-image {
+  cursor: pointer;
   position: absolute;
   top: 0px;
   height: 175px;

@@ -9,15 +9,18 @@ class User {
   }
 
   addFavoriteRecipe(recipe) {
+    if (this.favoriteRecipes.includes(recipe)) return;
     this.favoriteRecipes.push(recipe);
   }
 
+  //TODO: Fix to intake recipeID
   removeFavoriteRecipe(recipe) {
     const index = this.favoriteRecipes.indexOf(recipe);
     this.favoriteRecipes.splice(index, 1);
   }
 
   addRecipeToCook(recipe) {
+    if (this.recipesToCook.includes(recipe)) return;
     this.recipesToCook.push(recipe);
   }
 
