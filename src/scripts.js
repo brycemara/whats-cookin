@@ -15,6 +15,7 @@ let userName = document.querySelector('.user-name');
 let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
 let searchFavButton = document.getElementById('search-favorite-button');
+let favoriteRecipeLink = document.querySelector('.link');
 
 window.onload = () => {
   displayOnPageLoad();
@@ -22,6 +23,7 @@ window.onload = () => {
 
 searchButton.addEventListener('click', searchAllRecipes);
 searchFavButton.addEventListener('click', searchFavoriteRecipes);
+favoriteRecipeLink.addEventListener('click', displayFavoritedRecipes);
 
 // FOR HOME PAGE
 function displayOnPageLoad() {
@@ -157,6 +159,14 @@ function displaySearchResults(userInput) {
   searchDisplay.innerHTML = '';
   searchResults.forEach(result => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
+  })
+}
+
+function displayFavoritedRecipes() {
+  toggleView(searchView);
+  searchDisplay.innerHTML = '';
+  currentUser.favoriteRecipes.forEach(recipe => {
+    searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe))
   })
 }
 
