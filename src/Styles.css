@@ -165,6 +165,32 @@ h3 {
   justify-content: center;
 }
 
+.chef-icon {
+  right: 0px;
+}
+
+.heart-icon {
+  left: 0px;
+}
+
+.heart-recipe-icon{
+  position: relative;
+  right: 100px;
+  height: 40px;
+  width: 40px;
+  z-index: 5;
+  margin: 10px;
+}
+
+.chef-recipe-icon {
+  position: relative;
+  left: 100px;
+  height: 40px;
+  width: 40px;
+  z-index: 5;
+  margin: 10px;
+}
+
 #search-results > *:hover {
   box-shadow: 0px 0px 15px grey;
 }
