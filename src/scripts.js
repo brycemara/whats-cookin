@@ -97,7 +97,7 @@ function formatInstructions(recipe) {
   let formattedInstructions = '';
   recipe.instructions.forEach(instruction => {
     formattedInstructions +=
-    `Step${instruction.number} : ${instruction.instruction}
+    `Step ${instruction.number}: ${instruction.instruction}
 
     `;
   })
