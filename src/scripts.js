@@ -135,11 +135,13 @@ function displayChosenRecipe(recipeId) {
 }
 
 function searchAllRecipes() {
-  toggleView(searchView);
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
   let userInput = userSearchInput.value;
   userSearchInput.value = "";
-  if (!userInput) return;
+  if (userInput == "") {
+    return;
+  }
+  toggleView(searchView);
   displaySearchResults(userInput);
 }
 
@@ -157,9 +159,7 @@ function searchFavoriteRecipes() {
 }
 
 function displaySearchResults(userInput) {
-  let typeResults = currentUser.filterRecipes(userInput);
-  let ingredientResults = currentUser.searchByIngredient(userInput);
-  let searchResults = typeResults.concat(ingredientResults);
+  let searchResults = currentUser.searchAllRecipes(userInput);
   updateSearchResultsCount(userInput, searchResults.length);
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
