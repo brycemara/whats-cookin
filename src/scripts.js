@@ -119,11 +119,25 @@ function formatIngreidents(recipe) {
 
 function displayChosenRecipe(recipeId) {
   toggleView(recipeView);
+  document.querySelector('.recipe-icon').innerText = '';
   let recipe = getRecipeObject(recipeId);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
   ingredientList.innerText = formatIngreidents(recipe);
   recipeInstructions.innerText = formatInstructions(recipe);
+  document.querySelector('.recipe-icon').insertAdjacentHTML('beforeend', createHTMLRecipeIcon(recipe));
+}
+
+function createHTMLRecipeIcon(recipe) {
+  let favHighlight = "";
+  let cookHighlight = "";
+  if (currentUser.favoriteRecipes.includes(recipe)) favHighlight = "-clicked";
+  if (currentUser.recipesToCook.includes(recipe)) cookHighlight = "-clicked";
+  let recipeIcons =
+  `<img class="icon chef-recipe-icon" id="chef-${recipe.id}" src="../assets/chef.svg" onclick="updateCookLaterRecipe(${recipe.id})">
+  <img class="icon heart-recipe-icon" id="heart-${recipe.id}" src="../assets/heart.svg" onclick="updateFavoriteRecipe(${recipe.id})">
+  `;
+  return recipeIcons;
 }
 
 function searchAllRecipes() {
@@ -140,7 +154,6 @@ function displaySearchResults(userInput) {
   let searchResults = typeResults.concat(ingredientResults);
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
-  console.log(searchResults);
   searchResults.forEach(result => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
   })
@@ -157,7 +170,6 @@ function updateFavoriteRecipe(recipeId) {
   } else {
     currentUser.addFavoriteRecipe(recipe);
   }
-  // debugger;
   toggleIcon('heart', recipeId);
 }
 
@@ -172,8 +184,9 @@ function updateCookLaterRecipe(recipeId) {
 }
 
 function toggleIcon(icon, recipeId) {
-  console.log(icon, recipeId);
+  console.log(`${icon}-${recipeId}`)
   let currentIcon = document.getElementById(`${icon}-${recipeId}`)
+  debugger
   if (currentIcon.getAttribute('src') == `../assets/${icon}.svg`) {
     currentIcon.setAttribute('src', `../assets/${icon}-clicked.svg`);
   } else {
