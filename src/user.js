@@ -13,7 +13,6 @@ class User {
     this.favoriteRecipes.push(recipe);
   }
 
-  //TODO: Fix to intake recipeID
   removeFavoriteRecipe(recipe) {
     const index = this.favoriteRecipes.indexOf(recipe);
     this.favoriteRecipes.splice(index, 1);
@@ -63,7 +62,7 @@ class User {
     return inputFormatted;
   }
 
-  filterRecipes(type) {
+  filterRecipeType(type) {
     let recipeResults = this.recipes.recipeBook.reduce((acc, recipe) => {
       recipe.tags.forEach(tag => {
         if (tag.includes(type)) {
@@ -86,6 +85,22 @@ class User {
     }, []);
     return ingredientResults;
   }
+
+  searchAllRecipes(nameOrType) {
+    let formattedRecipeName = this.formatInput(nameOrType);
+    let recipeResults = this.recipes.recipeBook.filter(recipe => {
+      return recipe.name.includes(formattedRecipeName);
+    });
+    let typeResults = this.filterRecipeType(nameOrType.toLowerCase());
+    let ingredientResults = this.searchByIngredient(nameOrType.toLowerCase());
+    // let formattedIngredientName = name.toLowerCase();
+    // let typeResults = this.recipes.recipeBook.filter(recipe => {
+    //   return recipe.tags.includes(formattedIngredientName);
+    // });
+    let results = recipeResults.concat(typeResults, ingredientResults);
+    return Array.from(new Set(results));
+  }
+
 };
 
 if (typeof module !== 'undefined') {
