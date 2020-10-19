@@ -8,18 +8,24 @@ let recipeImg = document.getElementById('recipe-img');
 let recipeInstructions = document.querySelector('.recipe-instructions');
 let recipeName = document.querySelector('.recipe-name');
 let recipeView = document.querySelector('.recipe-view');
-let searchButton = document.querySelector('.search-button');
+let searchButton = document.getElementById('search-all-button');
 let searchDisplay = document.getElementById('search-results');
 let searchView = document.getElementById('search-display');
 let userName = document.querySelector('.user-name');
 let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
+let userSearchInput = document.getElementById('user-search-texbox');
+let searchFavButton = document.getElementById('search-favorite-button');
+let favoriteRecipeLink = document.querySelector('.link');
+
 
 window.onload = () => {
   displayOnPageLoad();
 }
 
 searchButton.addEventListener('click', searchAllRecipes);
+searchFavButton.addEventListener('click', searchFavoriteRecipes);
+favoriteRecipeLink.addEventListener('click', displayFavoritedRecipes);
 
 // FOR HOME PAGE
 function displayOnPageLoad() {
@@ -29,6 +35,7 @@ function displayOnPageLoad() {
 }
 
 function displayHomepage () {
+  userSearchInput.value = "";
   toggleView(homeView);
   displaySavedRecipes();
 }
@@ -118,6 +125,7 @@ function formatIngreidents(recipe) {
 }
 
 function displayChosenRecipe(recipeId) {
+  userSearchInput.value = "";
   toggleView(recipeView);
   document.querySelector('.recipe-icon').innerText = '';
   let recipe = getRecipeObject(recipeId);
@@ -141,22 +149,52 @@ function createHTMLRecipeIcon(recipe) {
 }
 
 function searchAllRecipes() {
-  toggleView(searchView);
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
-  let userInput = document.getElementById('user-search-texbox').value
-  if (!userInput) return;
+  let userInput = userSearchInput.value;
+  userSearchInput.value = "";
+  if (userInput == "") {
+    return;
+  }
+  toggleView(searchView);
   displaySearchResults(userInput);
 }
 
+function searchFavoriteRecipes() {
+  toggleView(searchView);
+  searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
+  let userInput = document.getElementById('user-search-texbox').value;
+  if (!userInput) return;
+  let favoriteResults = currentUser.searchFavoriteRecipes(userInput);
+  if (favoriteResults.length === 0) return;
+  searchDisplay.innerHTML = '';
+  favoriteResults.forEach(result => {
+    searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
+  })
+}
+
 function displaySearchResults(userInput) {
-  let typeResults = currentUser.filterRecipes(userInput);
-  let ingredientResults = currentUser.searchByIngredient(userInput);
-  let searchResults = typeResults.concat(ingredientResults);
+  let searchResults = currentUser.searchAllRecipes(userInput);
+  updateSearchResultsCount(userInput, searchResults.length);
   if (searchResults.length === 0) return;
   searchDisplay.innerHTML = '';
   searchResults.forEach(result => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(result));
   })
+}
+
+
+function updateSearchResultsCount(userInput, resultsCount) {
+  let counterDisplay = document.getElementById('results-count');
+  counterDisplay.innerText = `${resultsCount} Results for '${userInput}'`;
+}
+
+function displayFavoritedRecipes() {
+  toggleView(searchView);
+  searchDisplay.innerHTML = '';
+  currentUser.favoriteRecipes.forEach(recipe => {
+    searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe))
+  })
+
 }
 
 function getRecipeObject(recipeId) {
@@ -197,8 +235,12 @@ function toggleIcon(icon, recipeId) {
 function createHtmlRecipeBlock(recipe) {
   let favHighlight = "";
   let cookHighlight = "";
-  if (currentUser.favoriteRecipes.includes(recipe)) favHighlight = "-clicked";
-  if (currentUser.recipesToCook.includes(recipe)) cookHighlight = "-clicked";
+  if (currentUser.favoriteRecipes.includes(recipe)) {
+    favHighlight = "-clicked";
+  }
+  if (currentUser.recipesToCook.includes(recipe)) {
+    cookHighlight = "-clicked";
+  }
   let recipeBlock = `
     <div class="single-recipe-result">
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">

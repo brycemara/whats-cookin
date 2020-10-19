@@ -13,7 +13,6 @@ class User {
     this.favoriteRecipes.push(recipe);
   }
 
-  //TODO: Fix to intake recipeID
   removeFavoriteRecipe(recipe) {
     const index = this.favoriteRecipes.indexOf(recipe);
     this.favoriteRecipes.splice(index, 1);
@@ -43,7 +42,9 @@ class User {
       this.matchIngredientNames(acc, recipe, recipeOrIngredient);
       return acc;
     }, []);
-    return recipeResults.concat(ingredientResults);
+    let results = recipeResults.concat(ingredientResults);
+    results = Array.from(new Set(results));
+    return results;
   }
 
   matchIngredientNames(acc, recipe, recipeOrIngredient) {
@@ -61,18 +62,6 @@ class User {
     return inputFormatted;
   }
 
-  filterRecipes(type) {
-    let recipeResults = this.recipes.recipeBook.reduce((acc, recipe) => {
-      recipe.tags.forEach(tag => {
-        if (tag.includes(type)) {
-          acc.push(recipe);
-        };
-      });
-      return acc;
-    }, []);
-    return recipeResults;
-  }
-
   searchByIngredient(name) {
     let ingredientResults = this.recipes.recipeBook.reduce((acc, recipe) => {
       recipe.ingredients.forEach(ingredient => {
@@ -84,6 +73,29 @@ class User {
     }, []);
     return ingredientResults;
   }
+
+  searchRecipeByName(name) {
+    let formattedRecipeName = this.formatInput(name);
+    return this.recipes.recipeBook.filter(recipe => {
+      return recipe.name.includes(formattedRecipeName);
+    });
+  }
+
+  searchRecipeType(type) {
+    let typeName = type.toLowerCase();
+    return this.recipes.recipeBook.filter(recipe => {
+      return recipe.tags.includes(typeName);
+    });
+  }
+
+  searchAllRecipes(nameOrType) {
+    let recipeResults = this.searchRecipeByName(nameOrType);
+    let typeResults = this.searchRecipeType(nameOrType);
+    let ingredientResults = this.searchByIngredient(nameOrType.toLowerCase());
+    let results = recipeResults.concat(typeResults, ingredientResults);
+    return Array.from(new Set(results));
+  }
+
 };
 
 if (typeof module !== 'undefined') {
