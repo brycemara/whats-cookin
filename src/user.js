@@ -43,7 +43,9 @@ class User {
       this.matchIngredientNames(acc, recipe, recipeOrIngredient);
       return acc;
     }, []);
-    return recipeResults.concat(ingredientResults);
+    let results = recipeResults.concat(ingredientResults);
+    results = Array.from(new Set(results));
+    return results;
   }
 
   matchIngredientNames(acc, recipe, recipeOrIngredient) {
