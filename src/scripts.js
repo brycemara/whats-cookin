@@ -17,6 +17,8 @@ let favoritesView = document.querySelector('.saved-log');
 let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
 let favoriteRecipeLink = document.querySelector('.link');
+let cookedButton = document.querySelector('.cooked-button');
+
 
 
 window.onload = () => {
@@ -116,13 +118,42 @@ function formatIngredients(recipe) {
   let formattedIngredients = '';
   recipe.ingredients.forEach(ingredient => {
     formattedIngredients +=
-    `Name: ${ingredient.name}
-    Amount: ${ingredient.recipeAmount.amount}
-    Unit: ${ingredient.recipeAmount.unit}
+    `${ingredient.name}
+    ${ingredient.recipeAmount.amount} ${ingredient.recipeAmount.unit}
 
     `;
   })
   return formattedIngredients;
+}
+
+
+function checkIfCanMakeAndDisplay(recipeId) {
+  let checkIngredients = document.querySelector('.check-ingredients');
+  let recipe = getRecipeObject(recipeId);
+  if (currentUser.pantry.hasNeededIngredients(recipe)) {
+    checkIngredients.innerHTML = `<h3>You can cook this!</h3>
+    <button class="cooked-button" onclick="cookRecipe(${recipeId})">I cooked this!</button>`
+  } else {
+    let missingIngredients = currentUser.pantry.getIngredientsNeeded(recipe);
+    console.log(missingIngredients);
+    checkIngredients.innerHTML = `<p>Missing Ingredients:
+    </p> <p>${formatMissingIngredients(missingIngredients)}</p>`;
+  }
+}
+
+function formatMissingIngredients(missingIngredients) {
+  let formattedIngredients = '';
+  missingIngredients.forEach(ingredient => {
+    formattedIngredients += `${ingredient.amountMissing} ${ingredient.unit} ${ingredient.name}, `;
+  })
+  formattedIngredients = formattedIngredients.slice(0, formattedIngredients.length-2);
+  return formattedIngredients;
+}
+
+
+function cookRecipe(recipeId) {
+  let recipe = getRecipeObject(recipeId);
+  currentUser.removeUsedIngredients(recipe);
 }
 
 // TODO: Add a 'cooked' button that removes ingredients from pantry
@@ -138,8 +169,10 @@ function displayChosenRecipe(recipeId) {
   toggleView(recipeView);
   document.querySelector('.recipe-icon').innerText = '';
   let recipe = getRecipeObject(recipeId);
+  checkIfCanMakeAndDisplay(recipeId);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
+  document.querySelector('.recipe-cost').innerText = `Cost of Recipe: $${recipe.getCostOfIngredients(recipe)}`
   ingredientList.innerText = formatIngredients(recipe);
   recipeInstructions.innerText = formatInstructions(recipe);
   document.querySelector('.recipe-icon').insertAdjacentHTML('beforeend', createHTMLRecipeIcon(recipe));
@@ -174,8 +207,6 @@ function searchAllRecipes() {
   }
   displaySearchResults(userInput);
 }
-
-//TODO: Search favorite recipes does not return results from tags
 
 function searchFavoriteRecipes() {
   let userInput = getUserInput();

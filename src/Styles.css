@@ -28,6 +28,12 @@ h3 {
   margin: 20px 65px;
 }
 
+.check-ingredients {
+  width: 80%;
+  height: auto;
+  border: 2px red solid;
+}
+
 .recipe-ingredients {
   display: flex;
   justify-content: center;

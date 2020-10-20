@@ -29,7 +29,8 @@ class Pantry {
       let missingIngredient = new Ingredient(ingredient);
       missingIngredient.pantryAmount = pantryIngredient.pantryAmount;
       missingIngredient.recipeAmount = ingredient.recipeAmount.amount;
-      missingIngredient.amountMissing = ingredientDiff;
+      missingIngredient.unit = ingredient.recipeAmount.unit;
+      missingIngredient.amountMissing = Math.round(ingredientDiff * 100) / 100;
       return missingIngredient;
     }
   }
