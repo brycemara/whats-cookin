@@ -81,7 +81,7 @@ class User {
     return ingredientResults;
   }
 
-  searchRecipeByName(name) {
+  searchRecipeByName(name, array) {
     let formattedRecipeName = this.formatInput(name);
     return this.recipes.recipeBook.filter(recipe => {
       return recipe.name.includes(formattedRecipeName);
