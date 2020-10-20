@@ -125,14 +125,6 @@ function formatIngredients(recipe) {
   return formattedIngredients;
 }
 
-// TODO: Add a 'cooked' button that removes ingredients from pantry
-// and removes the recipe from the toCook list
-
-// TODO: Add view showing whether or not user has ingredients to
-// cook the dish, and if not, show what is missing
-
-// TODO/BUG: Fav/Saved recipe icons are not updated on recipe load
-
 function displayChosenRecipe(recipeId) {
   userSearchInput.value = "";
   toggleView(recipeView);
@@ -165,8 +157,6 @@ function getUserInput() {
   return userInput;
 }
 
-//TODO: Refactor all recipe flows, can be refactored
-
 function searchAllRecipes() {
   let userInput = getUserInput();
   if (userInput == "") {
@@ -174,8 +164,6 @@ function searchAllRecipes() {
   }
   displaySearchResults(userInput);
 }
-
-//TODO: Search favorite recipes does not return results from tags
 
 function searchFavoriteRecipes() {
   let userInput = getUserInput();
@@ -249,9 +237,6 @@ function toggleIcon(icon, recipeId) {
   })
 }
 
-// TODO: Process dish tags so there is spaces between them,
-// will allow for auto sizing on the recipe cards
-
 function createHtmlRecipeBlock(recipe) {
   let favHighlight = "";
   let cookHighlight = "";
@@ -261,11 +246,12 @@ function createHtmlRecipeBlock(recipe) {
   if (currentUser.recipesToCook.includes(recipe)) {
     cookHighlight = "-clicked";
   }
+  let tags = recipe.tags.join(', ');
   let recipeBlock = `
     <div class="single-recipe-result">
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
       <h3 id="recipe-name-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.name}</h3>
-      <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.tags}</p>
+      <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${tags}</p>
       <img class="icon chef chef-${recipe.id}" id="chef-${recipe.id}" src="../assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
       <img class="icon heart heart-${recipe.id}" id="heart-${recipe.id}" src="../assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
     </div>
