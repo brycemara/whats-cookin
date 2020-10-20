@@ -183,6 +183,7 @@ function searchFavoriteRecipes() {
     return;
   }
   let favoriteResults = currentUser.searchFavoriteRecipes(userInput);
+  updateSearchResultsCount(userInput, favoriteResults.length)
   if (favoriteResults.length === 0) return;
   searchDisplay.innerHTML = '';
   favoriteResults.forEach(result => {
