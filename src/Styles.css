@@ -240,7 +240,7 @@ h3 {
 #recipe-name-card {
   cursor: pointer;
   position: absolute;
-  bottom: 70px;
+  top: 162px;
   margin: 15px;
 }
 
@@ -248,7 +248,7 @@ h3 {
   cursor: pointer;
   font-style: italic;
   position: absolute;
-  bottom: 25px;
+  top: 210px;
   margin: 15px;
   width: 220px;
   background-color: #0b5a59;
