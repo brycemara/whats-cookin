@@ -55,7 +55,7 @@ function displaySavedRecipes() {
 
 function getRandomUser() {
   let userIndex = Math.floor(Math.random() * usersData.length);
-  currentUser = new User(usersData[1]);
+  currentUser = new User(usersData[userIndex]);
 }
 
 function getRandomRecipe() {
