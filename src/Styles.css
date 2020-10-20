@@ -206,6 +206,10 @@ h3 {
   border: solid 2px #DEB992;
 }
 
+.in-stock {
+  border: 3px green solid;
+}
+
 #recipe-name {
   background-color: #051622;
   margin: 0px 30px;
