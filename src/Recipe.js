@@ -24,7 +24,7 @@ class Recipe {
       acc += amount * cost;
       return acc;
     }, 0)
-    return totalCost;
+    return Math.round((totalCost / 100) * 10) / 10;
   }
 
   getInstructions() {

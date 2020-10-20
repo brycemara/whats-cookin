@@ -28,6 +28,12 @@ h3 {
   margin: 20px 65px;
 }
 
+.check-ingredients {
+  width: 80%;
+  height: auto;
+  border: 2px red solid;
+}
+
 .recipe-ingredients {
   display: flex;
   justify-content: center;
@@ -198,6 +204,10 @@ h3 {
 
 .large-recipe-image {
   border: solid 2px #DEB992;
+}
+
+.in-stock {
+  border: 3px green solid;
 }
 
 #recipe-name {

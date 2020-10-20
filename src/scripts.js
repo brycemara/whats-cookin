@@ -17,6 +17,8 @@ let favoritesView = document.querySelector('.saved-log');
 let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
 let favoriteRecipeLink = document.querySelector('.link');
+let cookedButton = document.querySelector('.cooked-button');
+
 
 
 window.onload = () => {
@@ -116,13 +118,40 @@ function formatIngredients(recipe) {
   let formattedIngredients = '';
   recipe.ingredients.forEach(ingredient => {
     formattedIngredients +=
-    `Name: ${ingredient.name}
-    Amount: ${ingredient.recipeAmount.amount}
-    Unit: ${ingredient.recipeAmount.unit}
+    `${ingredient.name}
+    ${ingredient.recipeAmount.amount} ${ingredient.recipeAmount.unit}
 
     `;
   })
   return formattedIngredients;
+}
+
+function checkIfCanMakeAndDisplay(recipeId) {
+  let checkIngredients = document.querySelector('.check-ingredients');
+  let recipe = getRecipeObject(recipeId);
+  if (currentUser.pantry.hasNeededIngredients(recipe)) {
+    checkIngredients.innerHTML = `<h3>You can cook this!</h3>
+    <button class="cooked-button" onclick="cookRecipe(${recipeId})">I cooked this!</button>`
+  } else {
+    let missingIngredients = currentUser.pantry.getIngredientsNeeded(recipe);
+    console.log(missingIngredients);
+    checkIngredients.innerHTML = `<p>Missing Ingredients:
+    </p> <p>${formatMissingIngredients(missingIngredients)}</p>`;
+  }
+}
+
+function formatMissingIngredients(missingIngredients) {
+  let formattedIngredients = '';
+  missingIngredients.forEach(ingredient => {
+    formattedIngredients += `${ingredient.amountMissing} ${ingredient.unit} ${ingredient.name}, `;
+  })
+  formattedIngredients = formattedIngredients.slice(0, formattedIngredients.length-2);
+  return formattedIngredients;
+}
+
+function cookRecipe(recipeId) {
+  let recipe = getRecipeObject(recipeId);
+  currentUser.pantry.removeUsedIngredients(recipe);
 }
 
 function displayChosenRecipe(recipeId) {
@@ -130,8 +159,10 @@ function displayChosenRecipe(recipeId) {
   toggleView(recipeView);
   document.querySelector('.recipe-icon').innerText = '';
   let recipe = getRecipeObject(recipeId);
+  checkIfCanMakeAndDisplay(recipeId);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
+  document.querySelector('.recipe-cost').innerText = `Cost of Recipe: $${recipe.getCostOfIngredients(recipe)}`
   ingredientList.innerText = formatIngredients(recipe);
   recipeInstructions.innerText = formatInstructions(recipe);
   document.querySelector('.recipe-icon').insertAdjacentHTML('beforeend', createHTMLRecipeIcon(recipe));
@@ -240,15 +271,22 @@ function toggleIcon(icon, recipeId) {
 function createHtmlRecipeBlock(recipe) {
   let favHighlight = "";
   let cookHighlight = "";
+  let inStock = "";
   if (currentUser.favoriteRecipes.includes(recipe)) {
     favHighlight = "-clicked";
   }
   if (currentUser.recipesToCook.includes(recipe)) {
     cookHighlight = "-clicked";
   }
+
+  if (currentUser.pantry.hasNeededIngredients(recipe)) {
+    inStock = "in-stock"
+  }
+
   let tags = recipe.tags.join(', ');
+
   let recipeBlock = `
-    <div class="single-recipe-result">
+    <div class="single-recipe-result ${inStock}">
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
       <h3 id="recipe-name-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.name}</h3>
       <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${tags}</p>
