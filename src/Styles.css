@@ -28,22 +28,16 @@ h3 {
   margin: 20px 65px;
 }
 
-.circle {
-  position: absolute;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  color: white;
-  z-index: 1;
-}
-
 .recipe-ingredients {
   display: flex;
   justify-content: center;
-  width: 30vw;
-  padding: 20px;
+  width: 350px;
   background-color: #0b5a59;
   border-radius: 10px;
+}
+
+.recipe-instructions{
+  margin: 20px;
 }
 
 .title {
@@ -78,18 +72,17 @@ h3 {
   width: 50px;
   z-index: 5;
   margin: 10px;
-  background-color: floralwhite;
-  radius: 50%;
-}
-
-.icon:hover {
+  background-color: #DEB992a8;
   box-shadow: 0px 0px 10px #fff;
+  cursor: pointer;
+  border-radius: 50%
 }
 
 .ingredients-view {
   background-color: #0b5a59;
   margin: 30px;
   border-radius: 30px;
+  width: 350px;
 }
 
 .link {
@@ -128,6 +121,7 @@ h3 {
 .recipe-details {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 20px;
 }
 
@@ -140,11 +134,6 @@ h3 {
 
 .recipe-view {
   display: flex;
-}
-
-.recipe-details {
-  display: flex;
-  align-items: center;
 }
 
 .saved-want-area {
@@ -172,7 +161,7 @@ h3 {
   margin: 20px;
   height: 300px;
   width: 250px;
-  border: lightgrey 1px solid;
+  border: #DEB992 1px solid;
   background-color: #0b5a59;
 }
 
@@ -204,6 +193,7 @@ h3 {
 
 .home-icon {
   width: 200px;
+  cursor: pointer;
 }
 
 .chef-recipe-icon {
@@ -287,4 +277,14 @@ h3 {
 
 #pantry-title {
   margin: 20px;
+}
+
+#user-search-textbox {
+  background-color: #DEB992;
+  color: black;
+}
+
+#instructions {
+  background-color: #051622;
+  font-style: oblique;
 }

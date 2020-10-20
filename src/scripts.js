@@ -14,7 +14,7 @@ let searchView = document.getElementById('search-display');
 let userName = document.querySelector('.user-name');
 let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
-let userSearchInput = document.getElementById('user-search-texbox');
+let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
 let favoriteRecipeLink = document.querySelector('.link');
 
@@ -128,6 +128,9 @@ function formatIngredients(recipe) {
 // TODO: Add a 'cooked' button that removes ingredients from pantry
 // and removes the recipe from the toCook list
 
+// TODO: Add view showing whether or not user has ingredients to
+// cook the dish, and if not, show what is missing
+
 function displayChosenRecipe(recipeId) {
   userSearchInput.value = "";
   toggleView(recipeView);
@@ -240,6 +243,9 @@ function toggleIcon(icon, recipeId) {
     currentIcon.setAttribute('src', `../assets/${icon}.svg`);
   }
 }
+
+// TODO: Process dish tags so there is spaces between them,
+// will allow for auto sizing on the recipe cards
 
 function createHtmlRecipeBlock(recipe) {
   let favHighlight = "";

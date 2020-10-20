@@ -56,6 +56,9 @@ class User {
     return acc;
   }
 
+  //TODO: make formatInput take in multiple length strings
+  // and process them accordingly
+
   formatInput(input) {
     let inputFormatted = input.toLowerCase();
     inputFormatted = inputFormatted.charAt(0).toUpperCase() + inputFormatted.slice(1);
