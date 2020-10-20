@@ -125,6 +125,9 @@ function formatIngredients(recipe) {
   return formattedIngredients;
 }
 
+// TODO: Add a 'cooked' button that removes ingredients from pantry
+// and removes the recipe from the toCook list
+
 function displayChosenRecipe(recipeId) {
   userSearchInput.value = "";
   toggleView(recipeView);
@@ -166,6 +169,8 @@ function searchAllRecipes() {
   }
   displaySearchResults(userInput);
 }
+
+//TODO: Search favorite recipes does not return results from tags
 
 function searchFavoriteRecipes() {
   let userInput = getUserInput();
