@@ -131,6 +131,8 @@ function formatIngredients(recipe) {
 // TODO: Add view showing whether or not user has ingredients to
 // cook the dish, and if not, show what is missing
 
+// TODO/BUG: Fav/Saved recipe icons are not updated on recipe load
+
 function displayChosenRecipe(recipeId) {
   userSearchInput.value = "";
   toggleView(recipeView);
