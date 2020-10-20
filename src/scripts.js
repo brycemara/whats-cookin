@@ -261,11 +261,12 @@ function createHtmlRecipeBlock(recipe) {
   if (currentUser.recipesToCook.includes(recipe)) {
     cookHighlight = "-clicked";
   }
+  let tags = recipe.tags.join(', ');
   let recipeBlock = `
     <div class="single-recipe-result">
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
       <h3 id="recipe-name-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.name}</h3>
-      <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.tags}</p>
+      <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${tags}</p>
       <img class="icon chef chef-${recipe.id}" id="chef-${recipe.id}" src="../assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
       <img class="icon heart heart-${recipe.id}" id="heart-${recipe.id}" src="../assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
     </div>
