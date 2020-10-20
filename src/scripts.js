@@ -63,7 +63,8 @@ function getRandomRecipe() {
 
 function displayUser() {
   getRandomUser()
-  userName.innerText = `Hello, ${currentUser.name}! Lets cook!`
+  userName.innerText = `Hello, ${currentUser.name}!
+  Lets cook!`
 }
 
 function displayRandomRecipe() {

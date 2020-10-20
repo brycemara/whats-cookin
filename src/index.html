@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./Styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <title>Eat Me!</title>
   </head>
   <body>
     <header>
       <section class="title-card">
-        <img id="home-icon" src="../assets/home-icon.png" alt="home icon" onclick="displayHomepage()">
+        <div class="home-icon">
+          <img id="home-icon" src="../assets/home-icon.png" alt="home icon" onclick="displayHomepage()">
+        </div>
         <div class="title">
           <h1>Eat Me!</h1>
         </div>
@@ -20,8 +23,6 @@
         <input id="user-search-texbox" type="text" name="search" value="">
         <button id="search-all-button"type="button" class="search-button">Search All Recipes!</button>
         <button id="search-favorite-button" type="button" class="search-button">Search Favorites!</button>
-      </section>
-      <section class="tag-widget">
       </section>
     </header>
     <section id="homepage" class="main-content">
@@ -53,7 +54,7 @@
       </section>
     </section>
     <section id="recipe-view" class="recipe-view hidden">
-      <div class=ingredients-view>
+      <div class="ingredients-view">
         <h3>Recipe Ingredients</h3>
         <p class="recipe-ingredients">List Ingredients Here</p>
       </div>
