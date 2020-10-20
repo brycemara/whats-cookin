@@ -42,7 +42,11 @@ class User {
       this.matchIngredientNames(acc, recipe, recipeOrIngredient);
       return acc;
     }, []);
-    let results = recipeResults.concat(ingredientResults);
+    let typeName = recipeOrIngredient.toLowerCase();
+    let typeResults = this.favoriteRecipes.filter(recipe => {
+      return recipe.tags.includes(typeName);
+    });
+    let results = recipeResults.concat(ingredientResults, typeResults);
     results = Array.from(new Set(results));
     return results;
   }
@@ -77,7 +81,7 @@ class User {
     return ingredientResults;
   }
 
-  searchRecipeByName(name) {
+  searchRecipeByName(name, array) {
     let formattedRecipeName = this.formatInput(name);
     return this.recipes.recipeBook.filter(recipe => {
       return recipe.name.includes(formattedRecipeName);
