@@ -1,10 +1,11 @@
 /* div colors: #0b5a59 */
 /* background-color: #051622; */
+/* Tan font: #DEB992 */
 
 * {
   background-color: #051622;
   font-family: 'Varela Round', sans-serif;
-  color: white;
+  color: floralwhite;
 }
 
 .hidden {
@@ -13,6 +14,10 @@
 
 h1 {
   margin: 15px;
+}
+
+h2 {
+  background-color: #0b5a59;
 }
 
 h3 {
@@ -36,20 +41,23 @@ h3 {
   display: flex;
   justify-content: center;
   width: 30vw;
-  padding: 30px;
+  padding: 20px;
   background-color: #0b5a59;
+  border-radius: 10px;
 }
 
 .title {
   text-align: center;
   font-size: 60px;
   transform: rotate(-3deg);
+  cursor: pointer;
 }
 
 .title-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0px 20px;
 }
 
 .main-content {
@@ -70,6 +78,8 @@ h3 {
   width: 50px;
   z-index: 5;
   margin: 10px;
+  background-color: floralwhite;
+  radius: 50%;
 }
 
 .icon:hover {
@@ -98,6 +108,7 @@ h3 {
   background-color: #0b5a59;
   padding: 30px;
   margin: 30px;
+  border-radius: 30px;
 }
 
 .pantry-items {
@@ -117,7 +128,7 @@ h3 {
 .recipe-details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin: 20px;
 }
 
 .recipe-name {
@@ -143,6 +154,7 @@ h3 {
   width: 30vw;
   background-color: #0b5a59;
   margin: 40px;
+  border-radius: 30px;
 }
 
 .saved-recipe {
@@ -152,6 +164,7 @@ h3 {
 .user-info {
   margin: 15px;
   width: 200px;
+  text-align: right;
 }
 
 .single-recipe-result {
@@ -170,23 +183,6 @@ h3 {
   left: 0px;
 }
 
-#results-count {
-  font-size: 20px;
-  font-style: italic;
-  margin: 15px;
-}
-#search-display {
-  display: flex;
-  flex-direction: column;
-}
-
-#search-results {
-  z-index: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 
 .chef-icon {
   right: 0px;
@@ -216,6 +212,28 @@ h3 {
   width: 40px;
   z-index: 5;
   margin: 10px;
+}
+
+.large-recipe-image {
+  border: solid 2px #DEB992;
+}
+
+#results-count {
+  font-size: 20px;
+  font-style: italic;
+  margin: 15px;
+}
+#search-display {
+  display: flex;
+  flex-direction: column;
+}
+
+#search-results {
+  z-index: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #search-results > *:hover {
@@ -256,4 +274,9 @@ h3 {
   position: relative;
   width: 100%;
   height: 100%;
+  margin: 40px 0px;
+}
+
+#pantry-title {
+  margin: 20px;
 }

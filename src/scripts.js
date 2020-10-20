@@ -34,7 +34,7 @@ function displayOnPageLoad() {
     displayPantryItems();
 }
 
-function displayHomepage () {
+function displayHomepage() {
   userSearchInput.value = "";
   toggleView(homeView);
   displaySavedRecipes();
@@ -112,17 +112,17 @@ function formatInstructions(recipe) {
   return formattedInstructions;
 }
 
-function formatIngreidents(recipe) {
-  let formattedIngreidents = '';
+function formatIngredients(recipe) {
+  let formattedIngredients = '';
   recipe.ingredients.forEach(ingredient => {
-    formattedIngreidents +=
+    formattedIngredients +=
     `Name: ${ingredient.name}
     Amount: ${ingredient.recipeAmount.amount}
     Unit: ${ingredient.recipeAmount.unit}
 
     `;
   })
-  return formattedIngreidents;
+  return formattedIngredients;
 }
 
 function displayChosenRecipe(recipeId) {
@@ -132,7 +132,7 @@ function displayChosenRecipe(recipeId) {
   let recipe = getRecipeObject(recipeId);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
-  ingredientList.innerText = formatIngreidents(recipe);
+  ingredientList.innerText = formatIngredients(recipe);
   recipeInstructions.innerText = formatInstructions(recipe);
   document.querySelector('.recipe-icon').insertAdjacentHTML('beforeend', createHTMLRecipeIcon(recipe));
 }
@@ -149,22 +149,29 @@ function createHTMLRecipeIcon(recipe) {
   return recipeIcons;
 }
 
-function searchAllRecipes() {
+function getUserInput() {
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
   let userInput = userSearchInput.value;
   userSearchInput.value = "";
+  toggleView(searchView);
+  return userInput;
+}
+
+//TODO: Refactor all recipe flows, can be refactored
+
+function searchAllRecipes() {
+  let userInput = getUserInput();
   if (userInput == "") {
     return;
   }
-  toggleView(searchView);
   displaySearchResults(userInput);
 }
 
 function searchFavoriteRecipes() {
-  toggleView(searchView);
-  searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
-  let userInput = document.getElementById('user-search-texbox').value;
-  if (!userInput) return;
+  let userInput = getUserInput();
+  if (userInput == "") {
+    return;
+  }
   let favoriteResults = currentUser.searchFavoriteRecipes(userInput);
   if (favoriteResults.length === 0) return;
   searchDisplay.innerHTML = '';
@@ -183,19 +190,17 @@ function displaySearchResults(userInput) {
   })
 }
 
-
-function updateSearchResultsCount(userInput, resultsCount) {
-  let counterDisplay = document.getElementById('results-count');
-  counterDisplay.innerText = `${resultsCount} Results for '${userInput}'`;
-}
-
 function displayFavoritedRecipes() {
   toggleView(searchView);
   searchDisplay.innerHTML = '';
   currentUser.favoriteRecipes.forEach(recipe => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe))
   })
+}
 
+function updateSearchResultsCount(userInput, resultsCount) {
+  let counterDisplay = document.getElementById('results-count');
+  counterDisplay.innerText = `${resultsCount} Results for '${userInput}'`;
 }
 
 function getRecipeObject(recipeId) {
@@ -223,9 +228,7 @@ function updateCookLaterRecipe(recipeId) {
 }
 
 function toggleIcon(icon, recipeId) {
-  console.log(`${icon}-${recipeId}`)
-  let currentIcon = document.getElementById(`${icon}-${recipeId}`)
-  debugger
+  let currentIcon = document.getElementById(`${icon}-${recipeId}`);
   if (currentIcon.getAttribute('src') == `../assets/${icon}.svg`) {
     currentIcon.setAttribute('src', `../assets/${icon}-clicked.svg`);
   } else {
