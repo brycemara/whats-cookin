@@ -14,7 +14,7 @@ let searchView = document.getElementById('search-display');
 let userName = document.querySelector('.user-name');
 let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
-let userSearchInput = document.getElementById('user-search-texbox');
+let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
 let favoriteRecipeLink = document.querySelector('.link');
 
@@ -34,7 +34,7 @@ function displayOnPageLoad() {
     displayPantryItems();
 }
 
-function displayHomepage () {
+function displayHomepage() {
   userSearchInput.value = "";
   toggleView(homeView);
   displaySavedRecipes();
@@ -63,7 +63,8 @@ function getRandomRecipe() {
 
 function displayUser() {
   getRandomUser()
-  userName.innerText = `Hello, ${currentUser.name}! Lets cook!`
+  userName.innerText = `Hello, ${currentUser.name}!
+  Lets cook!`
 }
 
 function displayRandomRecipe() {
@@ -111,18 +112,26 @@ function formatInstructions(recipe) {
   return formattedInstructions;
 }
 
-function formatIngreidents(recipe) {
-  let formattedIngreidents = '';
+function formatIngredients(recipe) {
+  let formattedIngredients = '';
   recipe.ingredients.forEach(ingredient => {
-    formattedIngreidents +=
+    formattedIngredients +=
     `Name: ${ingredient.name}
     Amount: ${ingredient.recipeAmount.amount}
     Unit: ${ingredient.recipeAmount.unit}
 
     `;
   })
-  return formattedIngreidents;
+  return formattedIngredients;
 }
+
+// TODO: Add a 'cooked' button that removes ingredients from pantry
+// and removes the recipe from the toCook list
+
+// TODO: Add view showing whether or not user has ingredients to
+// cook the dish, and if not, show what is missing
+
+// TODO/BUG: Fav/Saved recipe icons are not updated on recipe load
 
 function displayChosenRecipe(recipeId) {
   userSearchInput.value = "";
@@ -131,7 +140,7 @@ function displayChosenRecipe(recipeId) {
   let recipe = getRecipeObject(recipeId);
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
-  ingredientList.innerText = formatIngreidents(recipe);
+  ingredientList.innerText = formatIngredients(recipe);
   recipeInstructions.innerText = formatInstructions(recipe);
   document.querySelector('.recipe-icon').insertAdjacentHTML('beforeend', createHTMLRecipeIcon(recipe));
 }
@@ -148,22 +157,31 @@ function createHTMLRecipeIcon(recipe) {
   return recipeIcons;
 }
 
-function searchAllRecipes() {
+function getUserInput() {
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
   let userInput = userSearchInput.value;
   userSearchInput.value = "";
+  toggleView(searchView);
+  return userInput;
+}
+
+//TODO: Refactor all recipe flows, can be refactored
+
+function searchAllRecipes() {
+  let userInput = getUserInput();
   if (userInput == "") {
     return;
   }
-  toggleView(searchView);
   displaySearchResults(userInput);
 }
 
+//TODO: Search favorite recipes does not return results from tags
+
 function searchFavoriteRecipes() {
-  toggleView(searchView);
-  searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
-  let userInput = document.getElementById('user-search-texbox').value;
-  if (!userInput) return;
+  let userInput = getUserInput();
+  if (userInput == "") {
+    return;
+  }
   let favoriteResults = currentUser.searchFavoriteRecipes(userInput);
   if (favoriteResults.length === 0) return;
   searchDisplay.innerHTML = '';
@@ -182,19 +200,17 @@ function displaySearchResults(userInput) {
   })
 }
 
-
-function updateSearchResultsCount(userInput, resultsCount) {
-  let counterDisplay = document.getElementById('results-count');
-  counterDisplay.innerText = `${resultsCount} Results for '${userInput}'`;
-}
-
 function displayFavoritedRecipes() {
   toggleView(searchView);
   searchDisplay.innerHTML = '';
   currentUser.favoriteRecipes.forEach(recipe => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe))
   })
+}
 
+function updateSearchResultsCount(userInput, resultsCount) {
+  let counterDisplay = document.getElementById('results-count');
+  counterDisplay.innerText = `${resultsCount} Results for '${userInput}'`;
 }
 
 function getRecipeObject(recipeId) {
@@ -222,15 +238,16 @@ function updateCookLaterRecipe(recipeId) {
 }
 
 function toggleIcon(icon, recipeId) {
-  console.log(`${icon}-${recipeId}`)
-  let currentIcon = document.getElementById(`${icon}-${recipeId}`)
-  debugger
+  let currentIcon = document.getElementById(`${icon}-${recipeId}`);
   if (currentIcon.getAttribute('src') == `../assets/${icon}.svg`) {
     currentIcon.setAttribute('src', `../assets/${icon}-clicked.svg`);
   } else {
     currentIcon.setAttribute('src', `../assets/${icon}.svg`);
   }
 }
+
+// TODO: Process dish tags so there is spaces between them,
+// will allow for auto sizing on the recipe cards
 
 function createHtmlRecipeBlock(recipe) {
   let favHighlight = "";

@@ -3,13 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./Styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <title>Eat Me!</title>
   </head>
   <body>
     <header>
       <section class="title-card">
-        <img id="home-icon" src="../assets/home-icon.png" alt="home icon" onclick="displayHomepage()">
-        <div class="title">
+        <div class="home-icon">
+          <img id="home-icon" src="../assets/home-icon.png" alt="home icon" onclick="displayHomepage()">
+        </div>
+        <div class="title" onclick="displayHomepage()">
           <h1>Eat Me!</h1>
         </div>
         <div class="user-info">
@@ -17,21 +20,19 @@
         </div>
       </section>
       <section class="search-bar">
-        <input id="user-search-texbox" type="text" name="search" value="">
+        <input id="user-search-textbox" type="text" name="search" value="">
         <button id="search-all-button"type="button" class="search-button">Search All Recipes!</button>
         <button id="search-favorite-button" type="button" class="search-button">Search Favorites!</button>
-      </section>
-      <section class="tag-widget">
       </section>
     </header>
     <section id="homepage" class="main-content">
       <section class="pantry-content">
-        <h2>Your Pantry Items</h2>
+        <h3 id="pantry-title">Your Pantry Items</h3>
         <p class="pantry-items"></p>
       </section>
       <section class="recipe-area">
         <div class="random-recipe-landing">
-          <img id="large-dish-image" onclick="" src="" alt="Recipe image">
+          <img id="large-dish-image" class="large-recipe-image" onclick="" src="" alt="Recipe image">
         </div>
         <div class="random-recipe-name">
           <h3 id="recipe-name">Recipe Name</h3>
@@ -40,7 +41,6 @@
       <section class="saved-want-area">
         <button class="link">Favorite Recipes</button>
         <div class="saved-log">
-          <p>You have no saved or favorited recipes.</p>
         </div>
       </section>
     </section>
@@ -53,7 +53,7 @@
       </section>
     </section>
     <section id="recipe-view" class="recipe-view hidden">
-      <div class=ingredients-view>
+      <div class="ingredients-view">
         <h3>Recipe Ingredients</h3>
         <p class="recipe-ingredients">List Ingredients Here</p>
       </div>
@@ -61,8 +61,8 @@
         <h1 class="recipe-name">Recipe Name</h1>
         <div class="recipe-icon">
         </div>
-        <img id="recipe-img" src="" alt="">
-        <h3>Instructions</h3>
+        <img id="recipe-img" class="large-recipe-image" src="" alt="">
+        <h3 id="instructions">Instructions</h3>
         <p class="recipe-instructions">Instructions</p>
       </div>
     </section>
