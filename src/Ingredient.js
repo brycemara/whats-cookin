@@ -8,14 +8,11 @@ class Ingredient {
   }
 
   findIngredientData(key) {
-    let ingredientName = ingredientsData.find(element => {
-      return element.id === this.id;
-    });
+    const ingredientName = ingredientsData.find((element) => element.id === this.id);
     return ingredientName[key];
   }
-};
-
+}
 
 if (typeof module !== 'undefined') {
   module.exports = Ingredient;
-};
+}
