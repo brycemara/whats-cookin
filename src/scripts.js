@@ -122,10 +122,8 @@ function makeChosenRecipeDisplay(recipe) {
 }
 
 function createHTMLRecipeIcon(recipe) {
-  let favHighlight = '';
-  let cookHighlight = '';
-  if (currentUser.favoriteRecipes.includes(recipe)) favHighlight = '-clicked';
-  if (currentUser.recipesToCook.includes(recipe)) cookHighlight = '-clicked';
+  const favHighlight = checkIconHighlight('favoriteRecipes', recipe);
+  const cookHighlight = checkIconHighlight('recipesToCook', recipe);
   const recipeIcons = `<img class="icon chef-recipe-icon chef-${recipe.id}" id="chef-${recipe.id}" src="../assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
   <img class="icon heart-recipe-icon heart-${recipe.id}" id="heart-${recipe.id}" src="../assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
   `;
