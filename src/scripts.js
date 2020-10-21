@@ -67,6 +67,7 @@ function displayUser() {
 function displayRandomRecipe() {
   let currentRecipe = getRandomRecipe();
   randomRecipeName.innerText = currentRecipe.name;
+  randomRecipeName.setAttribute("onclick", `displayChosenRecipe(${currentRecipe.id})`);
   randomRecipeImage.src = currentRecipe.image;
   randomRecipeImage.setAttribute("onclick", `displayChosenRecipe(${currentRecipe.id})`);
   userPantryItems.innerText = currentUser.pantry;
