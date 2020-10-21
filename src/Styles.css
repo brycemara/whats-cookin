@@ -3,9 +3,13 @@
 /* Tan font: #DEB992 */
 
 * {
-  background-color: #051622;
+  background: transparent;
   font-family: 'Varela Round', sans-serif;
   color: floralwhite;
+}
+
+body {
+  background: linear-gradient(146deg, rgba(5,22,34,1) 0%, rgba(7,61,61,1) 100%);
 }
 
 .hidden {
@@ -17,13 +21,12 @@ h1 {
 }
 
 h2 {
-  background-color: transparent;
+
 }
 
 h3 {
   display: flex;
   justify-content: center;
-  background-color: transparent;
   border-bottom: #DEB992 solid 2px;
   margin: 20px 65px;
 }
@@ -39,7 +42,6 @@ h3 {
   display: flex;
   justify-content: center;
   width: 350px;
-  background-color: transparent;
   border-radius: 10px;
 }
 
@@ -56,9 +58,9 @@ h3 {
 
 .title-card {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin: 0px 20px;
+  margin: 0px 30px;
 }
 
 .main-content {
@@ -68,7 +70,7 @@ h3 {
 .search-bar {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding-bottom: 20px;
   border-bottom: #DEB992 solid 2px;
   margin: 0px 100px;
 }
@@ -106,16 +108,24 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
   margin: 30px;
   border-radius: 30px;
   background: linear-gradient(280deg, rgba(20,53,77,1) 0%, rgba(11,90,89,1) 52%);
 }
 
+.saved-log {
+  overflow-y: scroll;
+  height: 500px;
+  margin: 30px;
+  width: 20vw;
+}
+
 .pantry-items {
   display: flex;
   width: 20vw;
-  background: transparent;
+  overflow-y: scroll;
+  height: 500px;
+  margin: 30px;
 }
 
 .recipe-area {
@@ -160,7 +170,7 @@ h3 {
 .user-info {
   margin: 15px;
   width: 200px;
-  text-align: right;
+  text-align: center;
 }
 
 .single-recipe-result {
@@ -174,7 +184,6 @@ h3 {
 
 .recipe-cost {
   text-align: center;
-  background-color: transparent;
 }
 
 .chef {
@@ -196,6 +205,7 @@ h3 {
 
 .home-icon {
   width: 200px;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -226,8 +236,11 @@ h3 {
   background: linear-gradient(350deg, rgba(14,52,79,1) 0%, rgba(11,90,89,1) 74%);
 }
 
+.search-button:hover {
+  background: linear-gradient(170deg, rgba(14,52,79,1) 0%, rgba(11,90,89,1) 74%);
+}
+
 #recipe-name {
-  background-color: #051622;
   margin: 0px 30px;
 }
 
@@ -301,6 +314,7 @@ h3 {
   background-color: #0b5a59;
   color: floralwhite;
   font-size: 18px;
+  text-align: center;
   padding: 10px;
   width: 250px;
   height: 15px;
