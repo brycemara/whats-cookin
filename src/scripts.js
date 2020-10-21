@@ -124,8 +124,8 @@ function makeChosenRecipeDisplay(recipe) {
 function createHTMLRecipeIcon(recipe) {
   const favHighlight = checkIconHighlight('favoriteRecipes', recipe);
   const cookHighlight = checkIconHighlight('recipesToCook', recipe);
-  const recipeIcons = `<img class="icon chef-recipe-icon chef-${recipe.id}" id="chef-${recipe.id}" src="../assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
-  <img class="icon heart-recipe-icon heart-${recipe.id}" id="heart-${recipe.id}" src="../assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
+  const recipeIcons = `<img class="icon chef-recipe-icon chef-${recipe.id}" id="chef-${recipe.id}" src="./assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
+  <img class="icon heart-recipe-icon heart-${recipe.id}" id="heart-${recipe.id}" src="./assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
   `;
   return recipeIcons;
 }
@@ -239,8 +239,8 @@ function createHtmlRecipeBlock(recipe) {
       <img id="small-dish-image" src=${recipe.image} alt="Recipe ${recipe.id}" onclick="displayChosenRecipe(${recipe.id})">
       <h3 id="recipe-name-card" onclick="displayChosenRecipe(${recipe.id})">${recipe.name}</h3>
       <p id="recipe-tags-card" onclick="displayChosenRecipe(${recipe.id})">${tags}</p>
-      <img class="icon chef chef-${recipe.id}" id="chef-${recipe.id}" src="../assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
-      <img class="icon heart heart-${recipe.id}" id="heart-${recipe.id}" src="../assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
+      <img class="icon chef chef-${recipe.id}" id="chef-${recipe.id}" src="./assets/chef${cookHighlight}.svg" onclick="updateCookLaterRecipe(${recipe.id})">
+      <img class="icon heart heart-${recipe.id}" id="heart-${recipe.id}" src="./assets/heart${favHighlight}.svg" onclick="updateFavoriteRecipe(${recipe.id})">
     </div>
   `;
   return recipeBlock;
@@ -293,10 +293,10 @@ function updateCookLaterRecipe(recipeId) {
 function toggleIcon(icon, recipeId) {
   const currentIcons = document.querySelectorAll(`.${icon}-${recipeId}`);
   currentIcons.forEach((currentIcon) => {
-    if (currentIcon.getAttribute('src') === `../assets/${icon}.svg`) {
-      currentIcon.setAttribute('src', `../assets/${icon}-clicked.svg`);
+    if (currentIcon.getAttribute('src') === `./assets/${icon}.svg`) {
+      currentIcon.setAttribute('src', `./assets/${icon}-clicked.svg`);
     } else {
-      currentIcon.setAttribute('src', `../assets/${icon}.svg`);
+      currentIcon.setAttribute('src', `./assets/${icon}.svg`);
     }
   });
 }
