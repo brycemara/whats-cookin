@@ -59,6 +59,7 @@ class Pantry {
       pantryIngredient.pantryAmount -= ingredient.recipeAmount.amount;
     });
   }
+
 };
 
 if (typeof module !== 'undefined') {
