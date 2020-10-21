@@ -1,21 +1,12 @@
 let currentUser;
 let homeView = document.getElementById('homepage');
-let ingredientList = document.querySelector('.recipe-ingredients');
-let randomRecipeImage = document.getElementById('large-dish-image');
-let randomRecipeImg = document.getElementById('large-dish-image');
-let randomRecipeName = document.getElementById('recipe-name');
-let recipeImg = document.getElementById('recipe-img');
-let recipeInstructions = document.querySelector('.recipe-instructions');
-let recipeName = document.querySelector('.recipe-name');
 let recipeView = document.querySelector('.recipe-view');
 let searchButton = document.getElementById('search-all-button');
 let searchDisplay = document.getElementById('search-results');
-let searchView = document.getElementById('search-display');
-let userName = document.querySelector('.user-name');
-let userPantryItems = document.querySelector('.pantry-items');
-let favoritesView = document.querySelector('.saved-log');
-let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
+let searchView = document.getElementById('search-display');
+let userPantryItems = document.querySelector('.pantry-items');
+let userSearchInput = document.getElementById('user-search-textbox');
 
 window.onload = () => {
   displayOnPageLoad();
@@ -38,6 +29,7 @@ function displayHomepage() {
 }
 
 function displaySavedRecipes() {
+  let favoritesView = document.querySelector('.saved-log');
   favoritesView.innerHTML = "<p>You have no saved or favortied recipes.</p>";
   if (!currentUser.recipesToCook && !currentUser.favoriteRecipes) return;
   favoritesView.innerHTML = "";
@@ -60,11 +52,14 @@ function getRandomRecipe() {
 
 function displayUser() {
   getRandomUser();
+  let userName = document.querySelector('.user-name');
   userName.innerText = `Hello, ${currentUser.name}!
   Lets cook!`;
 }
 
 function displayRandomRecipe() {
+  let randomRecipeImage = document.getElementById('large-dish-image');
+  let randomRecipeName = document.getElementById('recipe-name');
   let currentRecipe = getRandomRecipe();
   randomRecipeName.innerText = currentRecipe.name;
   randomRecipeName.setAttribute("onclick", `displayChosenRecipe(${currentRecipe.id})`);
@@ -92,6 +87,7 @@ function displayPantryItems() {
 
 // FOR SPECIFIC RECIPE PAGE
 function toggleView(viewToShow) {
+  window.scrollTo(0, 0);
   let views = [homeView, searchView, recipeView];
   views.forEach(view => {
     view.classList.add('hidden');
@@ -113,6 +109,10 @@ function displayChosenRecipe(recipeId) {
 }
 
 function makeChosenRecipeDisplay(recipe) {
+  let ingredientList = document.querySelector('.recipe-ingredients');
+  let recipeImg = document.getElementById('recipe-img');
+  let recipeInstructions = document.querySelector('.recipe-instructions');
+  let recipeName = document.querySelector('.recipe-name');
   recipeName.innerText = recipe.name;
   recipeImg.src = recipe.image;
   ingredientList.innerText = formatIngredients(recipe);
