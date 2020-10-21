@@ -84,7 +84,7 @@ h3 {
   background-color: #DEB992a8;
   box-shadow: 0px 0px 10px #fff;
   cursor: pointer;
-  border-radius: 50%
+  border-radius: 30%
 }
 
 .ingredients-view {
@@ -316,17 +316,33 @@ h3 {
   font-size: 18px;
   text-align: center;
   padding: 10px;
-  width: 250px;
+  width: 15px;
   height: 15px;
   border-radius: 20px;
   border: solid 2px #DEB992;
   background-image: url(../assets/search-icon.svg);
   background-repeat: no-repeat;
+  background-position: 50%;
+  transition: .5s all ease;
+}
+
+#user-search-textbox:hover {
+  /* background: #DEB992; */
+  cursor: pointer;
+  background-position: 50%;
+  filter: invert(1);
+}
+
+#user-search-textbox:focus {
+  width: 250px;
+  background-image: url(../assets/search-icon.svg);
+  background-repeat: no-repeat;
   background-position: 95%;
-  }
+  background-color: #0b5a59;
+  filter: none;
+  cursor: text;
 }
 
 #instructions {
-  background-color: #051622;
   font-style: oblique;
 }
