@@ -34,12 +34,12 @@ class User {
   }
 
   searchByIngredient(name, array) {
-    let nameInput = name.toLowerCase();
-    let ingredientResults = array.reduce((acc, recipe) => {
-      recipe.ingredients.forEach(ingredient => {
+    const nameInput = name.toLowerCase();
+    const ingredientResults = array.reduce((acc, recipe) => {
+      recipe.ingredients.forEach((ingredient) => {
         if (ingredient.name.includes(name) && !acc.includes(recipe)) {
           acc.push(recipe);
-        };
+        }
       });
       return acc;
     }, []);
@@ -47,52 +47,46 @@ class User {
   }
 
   searchRecipeByName(name, array) {
-    let formattedRecipeName = this.formatInput(name);
-    return array.filter(recipe => {
-      return recipe.name.includes(formattedRecipeName);
-    });
+    const formattedRecipeName = this.formatInput(name);
+    return array.filter((recipe) => recipe.name.includes(formattedRecipeName));
   }
 
   searchRecipeType(type, array) {
-    let typeName = type.toLowerCase();
-    let typeResults = array.reduce((acc, recipe) => {
-      recipe.tags.forEach(tag =>{
-        if (tag.includes(type)){
-          acc.push(recipe)
+    const typeName = type.toLowerCase();
+    const typeResults = array.reduce((acc, recipe) => {
+      recipe.tags.forEach((tag) => {
+        if (tag.includes(type)) {
+          acc.push(recipe);
         }
-      })
+      });
       return acc;
-    }, [])
+    }, []);
     return typeResults;
   }
 
-  //TODO: refactor searchFavoriteRecipes and searchAllRecipes to one function
-
   searchFavoriteRecipes(recipeOrIngredient) {
-    let recipeResults = this.searchRecipeByName(recipeOrIngredient, this.favoriteRecipes);
-    let ingredientResults = this.searchByIngredient(recipeOrIngredient, this.favoriteRecipes);
-    let typeResults = this.searchRecipeType(recipeOrIngredient, this.favoriteRecipes);
-    let results = recipeResults.concat(ingredientResults, typeResults);
+    const recipeResults = this.searchRecipeByName(recipeOrIngredient, this.favoriteRecipes);
+    const ingredientResults = this.searchByIngredient(recipeOrIngredient, this.favoriteRecipes);
+    const typeResults = this.searchRecipeType(recipeOrIngredient, this.favoriteRecipes);
+    const results = recipeResults.concat(ingredientResults, typeResults);
     return Array.from(new Set(results));
   }
 
   searchAllRecipes(nameOrType) {
-    let recipeResults = this.searchRecipeByName(nameOrType, this.recipes.recipeBook);
-    let typeResults = this.searchRecipeType(nameOrType, this.recipes.recipeBook);
-    let ingredientResults = this.searchByIngredient(nameOrType, this.recipes.recipeBook);
-    let results = recipeResults.concat(typeResults, ingredientResults);
+    const recipeResults = this.searchRecipeByName(nameOrType, this.recipes.recipeBook);
+    const typeResults = this.searchRecipeType(nameOrType, this.recipes.recipeBook);
+    const ingredientResults = this.searchByIngredient(nameOrType, this.recipes.recipeBook);
+    const results = recipeResults.concat(typeResults, ingredientResults);
     return Array.from(new Set(results));
   }
-
 
   formatInput(input) {
     let inputFormatted = input.toLowerCase();
     inputFormatted = inputFormatted.charAt(0).toUpperCase() + inputFormatted.slice(1);
     return inputFormatted;
+  }
 }
-
-};
 
 if (typeof module !== 'undefined') {
   module.exports = User;
-};
+}

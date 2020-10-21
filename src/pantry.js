@@ -4,29 +4,26 @@ class Pantry {
   }
 
   createNewIngredients(pantryIngredients) {
-    let ingredients = pantryIngredients.map(ingredient => {
-      return new Ingredient(ingredient);
-    });
+    const ingredients = pantryIngredients.map((ingredient) => new Ingredient(ingredient));
     return ingredients;
   }
 
   getIngredientsNeeded(recipe) {
-    let requiredIngredients = recipe.ingredients.reduce((missingIngredients, ingredient) => {
-      let pantryIngredient = this.findPantryIngredient(ingredient);
-      let missingIngredient = this.createMissingIngredients(ingredient, pantryIngredient);
+    const requiredIngredients = recipe.ingredients.reduce((missingIngredients, ingredient) => {
+      const pantryIngredient = this.findPantryIngredient(ingredient);
+      const missingIngredient = this.createMissingIngredients(ingredient, pantryIngredient);
       if (missingIngredient) {
         missingIngredients.push(missingIngredient);
       }
       return missingIngredients;
     }, []);
     return requiredIngredients;
-
   }
 
   createMissingIngredients(ingredient, pantryIngredient) {
-    let ingredientDiff = ingredient.recipeAmount.amount - pantryIngredient.pantryAmount;
+    const ingredientDiff = ingredient.recipeAmount.amount - pantryIngredient.pantryAmount;
     if (ingredientDiff >= 0) {
-      let missingIngredient = new Ingredient(ingredient);
+      const missingIngredient = new Ingredient(ingredient);
       missingIngredient.pantryAmount = pantryIngredient.pantryAmount;
       missingIngredient.recipeAmount = ingredient.recipeAmount.amount;
       missingIngredient.unit = ingredient.recipeAmount.unit;
@@ -36,32 +33,29 @@ class Pantry {
   }
 
   findPantryIngredient(ingredient) {
-    let pantryIngredient = this.contents.find(content => {
-      return content.id === ingredient.id;
-    });
+    let pantryIngredient = this.contents.find((content) => content.id === ingredient.id);
     if (!pantryIngredient) {
       pantryIngredient = ingredient;
       pantryIngredient.pantryAmount = 0;
-    };
+    }
     return pantryIngredient;
   }
 
-  hasNeededIngredients(recipe){
-    return (this.getIngredientsNeeded(recipe).length > 0) ? false : true;
+  hasNeededIngredients(recipe) {
+    return !((this.getIngredientsNeeded(recipe).length > 0));
   }
 
   removeUsedIngredients(recipe) {
     if (!this.hasNeededIngredients(recipe)) {
       return false;
     }
-    recipe.ingredients.forEach(ingredient => {
-      let pantryIngredient = this.findPantryIngredient(ingredient);
+    recipe.ingredients.forEach((ingredient) => {
+      const pantryIngredient = this.findPantryIngredient(ingredient);
       pantryIngredient.pantryAmount -= ingredient.recipeAmount.amount;
     });
   }
-
-};
+}
 
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
-};
+}

@@ -9,32 +9,28 @@ class Recipe {
   }
 
   createNewIngredients(recipe) {
-    let ingredients = recipe.ingredients.map(ingredient => {
-      return new Ingredient(ingredient);
-    });
+    const ingredients = recipe.ingredients.map((ingredient) => new Ingredient(ingredient));
     return ingredients;
   }
 
   getCostOfIngredients() {
     let amount;
     let cost;
-    let totalCost = this.ingredients.reduce((acc, ingredient) => {
+    const totalCost = this.ingredients.reduce((acc, ingredient) => {
       amount = ingredient.recipeAmount.amount;
       cost = ingredient.estimatedCostInCents;
       acc += amount * cost;
       return acc;
-    }, 0)
+    }, 0);
     return Math.round((totalCost / 100) * 100) / 100;
   }
 
   getInstructions() {
-    let instructions = this.instructions.map(step => {
-      return step.instruction;
-    });
+    const instructions = this.instructions.map((step) => step.instruction);
     return instructions;
   }
-};
+}
 
 if (typeof module !== 'undefined') {
   module.exports = Recipe;
-};
+}
