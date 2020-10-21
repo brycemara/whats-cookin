@@ -16,8 +16,6 @@ let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
 let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
-let favoriteRecipeButton = document.querySelector('.favorite-recipes');
-
 
 window.onload = () => {
   displayOnPageLoad();
@@ -195,7 +193,6 @@ function getUserInput() {
 
 function searchAllRecipes() {
   let userInput = getUserInput();
-  if (userInput == "") return;
   displaySearchResults(userInput);
 }
 
@@ -208,7 +205,10 @@ function displaySearchResults(userInput) {
 
 function searchFavoriteRecipes() {
   let userInput = getUserInput();
-  if (userInput == "") return;
+  if (userInput == "") {
+    displayUserRecipes('Favorite Recipes', currentUser.favoriteRecipes);
+    return;
+  }
   let favoriteResults = currentUser.searchFavoriteRecipes(userInput);
   updateSearchResultsCount(userInput, favoriteResults.length);
   if (favoriteResults.length === 0) return;

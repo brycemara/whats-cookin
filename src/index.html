@@ -17,14 +17,14 @@
         </div>
         <div class="user-info">
           <p class="user-name">UserName</p>
-          <button class="to-cook-recipes" onclick="displayUserRecipes('Recipes To Cook', currentUser.recipesToCook)">View Recipes to Cook</button>
-          <button class="favorite-recipes" onclick="displayUserRecipes('Favorite Recipes', currentUser.favoriteRecipes)">View Favorited Recipes</button>
         </div>
       </section>
       <section class="search-bar">
+        <button id="hide-me" class="search-button" onclick="displayUserRecipes('Recipes To Cook', currentUser.recipesToCook)">View Recipes to Cook</button>
         <button id="search-favorite-button" type="button" class="search-button">Search Favorites!</button>
         <input id="user-search-textbox" type="text" name="search" value="">
         <button id="search-all-button"type="button" class="search-button">Search All Recipes!</button>
+        <button id="hide-me-too" class="search-button" onclick="displayUserRecipes('Favorite Recipes', currentUser.favoriteRecipes)">View Favorited Recipes</button>
       </section>
     </header>
     <section id="homepage" class="main-content">

@@ -280,9 +280,10 @@ h3 {
 
 #recipe-tags-card {
   cursor: pointer;
+  font-size: 14px;
   font-style: italic;
   position: absolute;
-  top: 210px;
+  top: 233px;
   margin: 15px;
   width: 220px;
   background-color: #0b5a59;
@@ -332,6 +333,14 @@ h3 {
   cursor: pointer;
   background-position: 50%;
   filter: invert(.2);
+}
+
+#hide-me {
+
+}
+
+#user-search-textbox:focus+#hide-me {
+  transform: scale(2);
 }
 
 #user-search-textbox:focus {
