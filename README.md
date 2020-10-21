@@ -1,51 +1,31 @@
-# What's Cookin'? Starter Kit 
+## Eat Me! (Whats Cookin?!)
+[Bryce Jarrett](https://github.com/brycemara) and [Shawn Truesdale](https://github.com/Shawntru)
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
+Paired Project Mod 2
 
-## Set Up 
+### Description
+This a recipe tracking / meal prepping application that allows the user to view their pantry items, favorite recipes, recipes they want to cook and shows them what ingredients they need to buy for each recipe. Similar applications would be [All Recipes](https://www.allrecipes.com/) or [New York Times Cooking](https://cooking.nytimes.com/), but this application tops both those.
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run npm install to install project dependencies.
-4. Run open src/index.html in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-5. Make sure both members of your team are collaborators on the forked repo.
+### Timeline
+As a team we first began working with logic in each class file. This took us about 4 days to build and refactor. The rest of the time was spent working with the DOM in script.js.
 
-## Testing 
+### Usage
+Each User will have a pantry, a list of their favorite recipes and a list of recipes they wish to cook. Users are able to search through the 50 recipes we have on the application and add recipes to the whichever one of their lists they choose.
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
-
-## Linting Your Code 
-
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
-
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+If a User is unable to cook a recipe based on their pantry they will be displayed a list of missing ingredients. If they are able to make the recipe they are presented a button "I cooked this!" that will then take the ingredients used on the recipe out of the Users pantry.
 
 
-## Data Model
-### Users
-```js
-{
-  "id": [number],
-  "name": [string],
-  "pantry": [array of objects with amount and ingredient id properties]
-},
-```
+### Final Outcome
+When going the the application the user will be greeted with this home page and can display recipes.
 
-### Recipes
-```js
-{
-  "ingredients" [array of objects with ingredients ids(connection to ingredients), ingredient names, and quantity data],
-  "instructions": [array of objects with instructions properties and numbered steps],
-  "name": [string],
-  "tags": [array of strings representing info about the recipes]
-}
-```
+![alt text](https://media.giphy.com/media/aRwOXMpclFTRNCoNni/giphy.gif)
 
-### Ingredients
-```js
-{
-  "estimatedCostInCents": [number],
-  "id": [number -- connection to users and recipes],
-  "name": [string]
-}
-```
+
+The User can then search recipes. The User can search with a recipe name, ingredient or tag.
+
+![alt text](https://media.giphy.com/media/zSFYPbDufKHMoyIjrQ/giphy.gif)
+
+
+The User can favorite (heart icon) or add the recipe to cook (chef icon) on any recipe. The User can then view their favorites or their recipes to cook using the corresponding buttons. The User can also search through their favorite recipes based off recipe name, ingredient or tag.
+
+![alt text](https://media.giphy.com/media/3869TVfQmfpWAmHXUQ/giphy.gif)
