@@ -16,8 +16,6 @@ let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
 let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
-let favoriteRecipeButton = document.querySelector('.favorite-recipes');
-
 
 window.onload = () => {
   displayOnPageLoad();
@@ -69,6 +67,7 @@ function displayUser() {
 function displayRandomRecipe() {
   let currentRecipe = getRandomRecipe();
   randomRecipeName.innerText = currentRecipe.name;
+  randomRecipeName.setAttribute("onclick", `displayChosenRecipe(${currentRecipe.id})`);
   randomRecipeImage.src = currentRecipe.image;
   randomRecipeImage.setAttribute("onclick", `displayChosenRecipe(${currentRecipe.id})`);
   userPantryItems.innerText = currentUser.pantry;
@@ -184,7 +183,6 @@ function cookRecipe(recipeId) {
   currentUser.pantry.removeUsedIngredients(recipe);
 }
 
-
 // SEARCH BAR FUNCTIONALITY AND DISPLAY
 function getUserInput() {
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
@@ -196,7 +194,6 @@ function getUserInput() {
 
 function searchAllRecipes() {
   let userInput = getUserInput();
-  if (userInput == "") return;
   displaySearchResults(userInput);
 }
 
@@ -209,14 +206,17 @@ function displaySearchResults(userInput) {
 
 function searchFavoriteRecipes() {
   let userInput = getUserInput();
-  if (userInput == "") return;
+  if (userInput == "") {
+    displayUserRecipes('Favorite Recipes', currentUser.favoriteRecipes);
+    return;
+  }
   let favoriteResults = currentUser.searchFavoriteRecipes(userInput);
   updateSearchResultsCount(userInput, favoriteResults.length);
   if (favoriteResults.length === 0) return;
   makeMultipleBlocks(favoriteResults, searchDisplay);
 }
 
-function checkIcon(list, recipe) {
+function checkIconHighlight(list, recipe) {
   let highlight;
   if (currentUser[list].includes(recipe)) {
     highlight = "-clicked";
@@ -226,15 +226,16 @@ function checkIcon(list, recipe) {
   return highlight;
 }
 
-function createHtmlRecipeBlock(recipe) {
-
-  let favHighlight = checkIcon('favoriteRecipes', recipe);
-  let cookHighlight = checkIcon('recipesToCook', recipe);
-
-  let inStock = "";
+function checkInStock(recipe) {
   if (currentUser.pantry.hasNeededIngredients(recipe)) {
-    inStock = "in-stock"
+    return "in-stock";
   }
+}
+
+function createHtmlRecipeBlock(recipe) {
+  let favHighlight = checkIconHighlight('favoriteRecipes', recipe);
+  let cookHighlight = checkIconHighlight('recipesToCook', recipe);
+  let inStock = checkInStock(recipe);
   let tags = recipe.tags.join(', ');
   let recipeBlock = `
     <div class="single-recipe-result ${inStock}">

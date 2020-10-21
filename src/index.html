@@ -17,22 +17,23 @@
         </div>
         <div class="user-info">
           <p class="user-name">UserName</p>
-          <button class="to-cook-recipes" onclick="displayUserRecipes('Recipes To Cook', currentUser.recipesToCook)">View Recipes to Cook</button>
-          <button class="favorite-recipes" onclick="displayUserRecipes('Favorite Recipes', currentUser.favoriteRecipes)">View Favorited Recipes</button>
         </div>
       </section>
       <section class="search-bar">
-        <input id="user-search-textbox" type="text" name="search" value="">
-        <button id="search-all-button"type="button" class="search-button">Search All Recipes!</button>
+        <button class="search-button" onclick="displayUserRecipes('Recipes To Cook', currentUser.recipesToCook)">View Recipes to Cook</button>
         <button id="search-favorite-button" type="button" class="search-button">Search Favorites!</button>
+        <input id="user-search-textbox" autocomplete="off" type="text" name="search" value="">
+        <button id="search-all-button"type="button" class="search-button">Search All Recipes!</button>
+        <button class="search-button" onclick="displayUserRecipes('Favorite Recipes', currentUser.favoriteRecipes)">View Favorited Recipes</button>
       </section>
     </header>
     <section id="homepage" class="main-content">
       <section class="pantry-content">
-        <h3 id="pantry-title">Your Pantry Items</h3>
+        <h3 class="side-section-title">Your Pantry Items</h3>
         <p class="pantry-items"></p>
       </section>
       <section class="recipe-area">
+        <h2>Recipe of the Day:</h2>
         <div class="random-recipe-landing">
           <img id="large-dish-image" class="large-recipe-image" onclick="" src="" alt="Recipe image">
         </div>
@@ -41,14 +42,14 @@
         </div>
       </section>
       <section class="saved-want-area">
-        <h3>Favorite Recipes</h3>
+        <h3 class="side-section-title">Favorite Recipes</h3>
         <div class="saved-log">
         </div>
       </section>
     </section>
     <section id="search-display" class="main-content hidden">
       <div class="results-counter">
-        <p id="results-count">347 Results for Wheat Flour:</p>
+        <p id="results-count"></p>
       </div>
       <section id="search-results">
         <h1>Sorry, no matches to display.</h1>

@@ -8,6 +8,22 @@
   color: floralwhite;
 }
 
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+*::-webkit-scrollbar {
+  background: #0b5a59;
+  width: 12px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #0b5a59;
+  border-radius: 10px;
+  border: 2px solid #DEB992;
+}
+
 body {
   background: linear-gradient(146deg, rgba(5,22,34,1) 0%, rgba(7,61,61,1) 100%);
 }
@@ -21,7 +37,7 @@ h1 {
 }
 
 h2 {
-
+  margin: 25px;
 }
 
 h3 {
@@ -52,8 +68,8 @@ h3 {
 .title {
   text-align: center;
   font-size: 60px;
-  transform: rotate(-3deg);
   cursor: pointer;
+  text-shadow: 3px 3px 5px #DEB992;
 }
 
 .title-card {
@@ -81,10 +97,10 @@ h3 {
   width: 50px;
   z-index: 5;
   margin: 10px;
-  background-color: #DEB992a8;
+  background-color: #DEB99287;
   box-shadow: 0px 0px 10px #fff;
   cursor: pointer;
-  border-radius: 50%
+  border-radius: 30%
 }
 
 .ingredients-view {
@@ -226,7 +242,12 @@ h3 {
   border: 3px green solid;
 }
 
+.side-section-title {
+  margin: 20px;
+}
+
 .search-button {
+  cursor: pointer;
   height: 40px;
   width: 150px;
   margin: 10px;
@@ -241,7 +262,8 @@ h3 {
 }
 
 #recipe-name {
-  margin: 0px 30px;
+  margin: 15px 30px;
+  cursor: pointer;
 }
 
 #results-count {
@@ -275,9 +297,10 @@ h3 {
 
 #recipe-tags-card {
   cursor: pointer;
+  font-size: 14px;
   font-style: italic;
   position: absolute;
-  top: 210px;
+  top: 233px;
   margin: 15px;
   width: 220px;
   background-color: #0b5a59;
@@ -293,8 +316,9 @@ h3 {
 
 #home-icon {
   margin: 15px;
-  height: 32px;
-  width: 32px;
+  height: 50px;
+  width: 50px;
+  filter: invert(0.8);
 }
 
 #large-dish-image {
@@ -302,11 +326,6 @@ h3 {
   position: relative;
   width: 100%;
   height: auto;
-  margin: 40px 0px;
-}
-
-#pantry-title {
-  margin: 20px;
 }
 
 #user-search-textbox {
@@ -316,17 +335,33 @@ h3 {
   font-size: 18px;
   text-align: center;
   padding: 10px;
-  width: 250px;
+  width: 15px;
   height: 15px;
   border-radius: 20px;
   border: solid 2px #DEB992;
   background-image: url(../assets/search-icon.svg);
   background-repeat: no-repeat;
+  background-position: 50%;
+  transition: .4s all ease;
+  outline: none;
+}
+
+#user-search-textbox:hover {
+  cursor: pointer;
+  background-position: 50%;
+  filter: invert(.2);
+}
+
+#user-search-textbox:focus {
+  width: 225px;
+  background-image: url(../assets/search-icon.svg);
+  background-repeat: no-repeat;
   background-position: 95%;
-  }
+  background-color: #0b5a59;
+  filter: none;
+  cursor: text;
 }
 
 #instructions {
-  background-color: #051622;
   font-style: oblique;
 }
