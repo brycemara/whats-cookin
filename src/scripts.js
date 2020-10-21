@@ -184,7 +184,6 @@ function cookRecipe(recipeId) {
   currentUser.pantry.removeUsedIngredients(recipe);
 }
 
-
 // SEARCH BAR FUNCTIONALITY AND DISPLAY
 function getUserInput() {
   searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
@@ -216,7 +215,7 @@ function searchFavoriteRecipes() {
   makeMultipleBlocks(favoriteResults, searchDisplay);
 }
 
-function checkIcon(list, recipe) {
+function checkIconHighlight(list, recipe) {
   let highlight;
   if (currentUser[list].includes(recipe)) {
     highlight = "-clicked";
@@ -226,15 +225,16 @@ function checkIcon(list, recipe) {
   return highlight;
 }
 
-function createHtmlRecipeBlock(recipe) {
-
-  let favHighlight = checkIcon('favoriteRecipes', recipe);
-  let cookHighlight = checkIcon('recipesToCook', recipe);
-
-  let inStock = "";
+function checkInStock(recipe) {
   if (currentUser.pantry.hasNeededIngredients(recipe)) {
-    inStock = "in-stock"
+    return "in-stock";
   }
+}
+
+function createHtmlRecipeBlock(recipe) {
+  let favHighlight = checkIconHighlight('favoriteRecipes', recipe);
+  let cookHighlight = checkIconHighlight('recipesToCook', recipe);
+  let inStock = checkInStock(recipe);
   let tags = recipe.tags.join(', ');
   let recipeBlock = `
     <div class="single-recipe-result ${inStock}">

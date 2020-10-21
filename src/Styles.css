@@ -52,8 +52,8 @@ h3 {
 .title {
   text-align: center;
   font-size: 60px;
-  transform: rotate(-3deg);
   cursor: pointer;
+  text-shadow: 3px 3px 5px #DEB992;
 }
 
 .title-card {
@@ -226,7 +226,12 @@ h3 {
   border: 3px green solid;
 }
 
+.side-section-title {
+  margin: 20px;
+}
+
 .search-button {
+  cursor: pointer;
   height: 40px;
   width: 150px;
   margin: 10px;
@@ -305,10 +310,6 @@ h3 {
   margin: 40px 0px;
 }
 
-#pantry-title {
-  margin: 20px;
-}
-
 #user-search-textbox {
   margin: 10px;
   background-color: #0b5a59;
@@ -323,18 +324,18 @@ h3 {
   background-image: url(../assets/search-icon.svg);
   background-repeat: no-repeat;
   background-position: 50%;
-  transition: .5s all ease;
+  transition: .4s all ease;
+  outline: none;
 }
 
 #user-search-textbox:hover {
-  /* background: #DEB992; */
   cursor: pointer;
   background-position: 50%;
-  filter: invert(1);
+  filter: invert(.2);
 }
 
 #user-search-textbox:focus {
-  width: 250px;
+  width: 225px;
   background-image: url(../assets/search-icon.svg);
   background-repeat: no-repeat;
   background-position: 95%;
