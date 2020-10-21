@@ -219,16 +219,22 @@ function searchFavoriteRecipes() {
   makeMultipleBlocks(favoriteResults, searchDisplay);
 }
 
+function checkIcon(list, recipe) {
+  let highlight;
+  if (currentUser[list].includes(recipe)) {
+    highlight = "-clicked";
+  } else {
+    highlight = "";
+  }
+  return highlight;
+}
+
 function createHtmlRecipeBlock(recipe) {
-  let favHighlight = "";
-  let cookHighlight = "";
+
+  let favHighlight = checkIcon('favoriteRecipes', recipe);
+  let cookHighlight = checkIcon('recipesToCook', recipe);
+
   let inStock = "";
-  if (currentUser.favoriteRecipes.includes(recipe)) {
-    favHighlight = "-clicked";
-  }
-  if (currentUser.recipesToCook.includes(recipe)) {
-    cookHighlight = "-clicked";
-  }
   if (currentUser.pantry.hasNeededIngredients(recipe)) {
     inStock = "in-stock"
   }

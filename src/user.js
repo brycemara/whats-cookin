@@ -55,10 +55,18 @@ class User {
 
   searchRecipeType(type, array) {
     let typeName = type.toLowerCase();
-    return array.filter(recipe => {
-      return recipe.tags.includes(typeName);
-    });
+    let typeResults = array.reduce((acc, recipe) => {
+      recipe.tags.forEach(tag =>{
+        if (tag.includes(type)){
+          acc.push(recipe)
+        }
+      })
+      return acc;
+    }, [])
+    return typeResults;
   }
+
+  //TODO: refactor searchFavoriteRecipes and searchAllRecipes to one function
 
   searchFavoriteRecipes(recipeOrIngredient) {
     let recipeResults = this.searchRecipeByName(recipeOrIngredient, this.favoriteRecipes);
