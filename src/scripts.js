@@ -16,9 +16,7 @@ let userPantryItems = document.querySelector('.pantry-items');
 let favoritesView = document.querySelector('.saved-log');
 let userSearchInput = document.getElementById('user-search-textbox');
 let searchFavButton = document.getElementById('search-favorite-button');
-let favoriteRecipeLink = document.querySelector('.link');
-let cookedButton = document.querySelector('.cooked-button');
-
+let favoriteRecipeButton = document.querySelector('.favorite-recipes');
 
 
 window.onload = () => {
@@ -27,7 +25,6 @@ window.onload = () => {
 
 searchButton.addEventListener('click', searchAllRecipes);
 searchFavButton.addEventListener('click', searchFavoriteRecipes);
-favoriteRecipeLink.addEventListener('click', displayFavoritedRecipes);
 
 // FOR HOME PAGE
 function displayOnPageLoad() {
@@ -251,13 +248,15 @@ function createHtmlRecipeBlock(recipe) {
   return recipeBlock;
 }
 
-function displayFavoritedRecipes() {
+function displayUserRecipes(recipes, array) {
   toggleView(searchView);
-  makeMultipleBlocks(currentUser.favoriteRecipes, searchDisplay);
+  updateSearchResultsCount(recipes, array.length);
+  makeMultipleBlocks(array, searchDisplay);
 }
 
 function makeMultipleBlocks(array, searchDisplay) {
   searchDisplay.innerHTML = '';
+  if (array.length === 0) searchDisplay.innerHTML = '<h1>Sorry, no matches to display.</h1>';
   array.forEach(recipe => {
     searchDisplay.insertAdjacentHTML('beforeend', createHtmlRecipeBlock(recipe));
   })
