@@ -1,7 +1,7 @@
 ## Eat Me! (Whats Cookin?!)
 [Bryce Jarrett](https://github.com/brycemara) and [Shawn Truesdale](https://github.com/Shawntru)
 
-Checkout the deployed site [here](https://brycemara.github.io/whats-cookin/)
+Check out the deployed site [here](https://brycemara.github.io/whats-cookin/)
 
 Paired Project, Turing FEE Course Mod 2
 
